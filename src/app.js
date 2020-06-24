@@ -1,19 +1,17 @@
 const express = require('express');
-const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const path = require('path');
+const router = require('./router');
 const app = express();
 
 const port = 5000;
 
-const router = require('./router');
-
+const dbConfig = require('./config/dbConfig');
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '123456',
-    database: 'bicycle_canada',
+    host: dbConfig.HOST,
+    user: dbConfig.USER,
+    password: dbConfig.PASSWORD,
+    database: dbConfig.DB,
 });
 
 db.connect((err) => {
@@ -31,7 +29,6 @@ app.set('views', 'views');
 app.set('view engine', 'ejs'); //configure view engine
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); //parse form data client
-app.use(fileUpload()); // probably won't need this but what the hey
 
 app.use('/', router);
 app.listen(port, () => {
