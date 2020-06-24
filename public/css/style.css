@@ -1,0 +1,59 @@
+/* logo */
+.logo {
+    padding-bottom: 10px;
+}
+/* navbar */
+@media screen and (max-width: 1000px){
+    .last-link {
+        margin-bottom: 8px;
+    }
+}
+/* featured articles */
+.active-pink-2 input.form-control[type=text]:focus:not([readonly]) {
+    border: 1px solid red;
+  }
+
+  .carousel-indicators li {
+    background-color: #999;
+    background-color: rgba(70, 70, 70, 0.25);
+  }
+  
+  .carousel-indicators .active {
+    background-color: #444;
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    height: 100px;
+    width: 100px;
+    background-size: 100%, 100%;
+    border-radius: 50%;
+    background-image: none;
+  }
+  
+  .carousel-control-next-icon:after
+  {
+    content: '>';
+    font-size: 55px;
+    color:antiquewhite;
+  }
+  
+  .carousel-control-prev-icon:after {
+    content: '<';
+    font-size: 55px;
+    color: antiquewhite;
+  }
+
+/* article lists */
+#list {
+    width: 100%;
+}
+
+/* footer */
+.footer {
+    background-color: red ;
+    color: white;
+}
+.footer a {
+    color: white;
+}
