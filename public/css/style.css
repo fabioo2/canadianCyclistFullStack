@@ -9,6 +9,8 @@
     }
 }
 /* featured articles */
+
+
 .active-pink-2 input.form-control[type=text]:focus:not([readonly]) {
     border: 1px solid red;
   }
@@ -22,27 +24,6 @@
     background-color: #444;
   }
   
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    height: 100px;
-    width: 100px;
-    background-size: 100%, 100%;
-    border-radius: 50%;
-    background-image: none;
-  }
-  
-  .carousel-control-next-icon:after
-  {
-    content: '>';
-    font-size: 55px;
-    color:antiquewhite;
-  }
-  
-  .carousel-control-prev-icon:after {
-    content: '<';
-    font-size: 55px;
-    color: antiquewhite;
-  }
 
 /* article lists */
 #list {
