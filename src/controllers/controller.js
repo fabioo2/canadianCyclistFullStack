@@ -18,6 +18,8 @@ exports.renderCreatePage = (req, res) => {
     res.render('create.ejs', { title: 'Canadian Cyclist | Create New Post' });
 };
 
+//create Table
+
 //create POST
 exports.createPost = (req, res) => {
     let message = '';
