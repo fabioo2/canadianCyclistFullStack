@@ -19,6 +19,15 @@ exports.renderCreatePage = (req, res) => {
 };
 
 //create Table
+exports.createTable = (req, res) => {
+    let sql =
+        'CREATE TABLE posts2 (id int AUTO_INCREMENT, author VARCHAR(255), title VARCHAR(255), content text, date DATE, Primary Key (Id))';
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.send('posts2 Table created');
+    });
+};
 
 //create POST
 exports.createPost = (req, res) => {
