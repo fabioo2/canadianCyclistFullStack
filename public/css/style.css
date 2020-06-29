@@ -11,7 +11,7 @@
 /* featured articles */
 
 
-.active-pink-2 input.form-control[type=text]:focus:not([readonly]) {
+/* .active-pink-2 input.form-control[type=text]:focus:not([readonly]) {
     border: 1px solid red;
   }
 
@@ -23,7 +23,7 @@
   .carousel-indicators .active {
     background-color: #444;
   }
-  
+   */
 
 /* article lists */
 #list {
