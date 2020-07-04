@@ -4,7 +4,7 @@ const mysql = require('mysql');
 const router = require('./router');
 const app = express();
 
-const port = 5000;
+const PORT = process.env.PORT || 5000;
 
 const dbConfig = require('./config/dbConfig');
 const db = mysql.createConnection({
@@ -23,7 +23,7 @@ db.connect((err) => {
 global.db = db;
 
 //middleware
-app.set('port', process.env.port || port); // set express to use our port
+app.set('port', process.env.PORT || PORT); // set express to use our port
 app.use(express.static('public'));
 app.set('views', 'views');
 app.set('view engine', 'ejs'); //configure view engine
@@ -31,6 +31,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); //parse form data client
 
 app.use('/', router);
-app.listen(port, () => {
-    console.log(`Server running on port: ${port}`);
+app.listen(PORT, () => {
+    console.log(`Server running on port: ${PORT}`);
 });
