@@ -1,6 +1,6 @@
 module.exports = {
-    HOST: 'localhost',
-    USER: 'root',
-    PASSWORD: '123456',
-    DB: 'bicycle_canada',
+    HOST: 'remotemysql.com',
+    USER: 'S3IYAbIbDC',
+    PASSWORD: 'ReJyVCISEI',
+    DB: 'S3IYAbIbDC',
 };
