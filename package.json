@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
   },
   "author": "Fabio Kim, Andy Lien, Olivia Seo",
   "license": "ISC",
@@ -15,5 +16,8 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.3",
     "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
