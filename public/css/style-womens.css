@@ -1,0 +1,54 @@
+/* logo */
+.logo {
+    padding-bottom: 10px;
+}
+/* navbar */
+@media screen and (max-width: 1000px){
+    .last-link {
+        margin-bottom: 8px;   
+    }
+    #navbarNav {
+        background-color: #8054B4;
+        padding: 10px;
+    }
+    .nav-link {
+        color: white;
+    }
+}
+/* featured articles */
+
+
+/* .active-pink-2 input.form-control[type=text]:focus:not([readonly]) {
+    border: 1px solid red;
+  }
+
+  .carousel-indicators li {
+    background-color: #999;
+    background-color: rgba(70, 70, 70, 0.25);
+  }
+  
+  .carousel-indicators .active {
+    background-color: #444;
+  }
+   */
+
+/* article lists */
+#list {
+    width: 100%;
+}
+
+.panel-title {
+    background-color: #8054B4;
+    margin: 0;
+    padding: 10px;
+    color: white;
+}
+
+/* footer */
+.footer {
+    background-color:#8054B4 ;
+    color: white;
+}
+.footer a {
+    color: white;
+}

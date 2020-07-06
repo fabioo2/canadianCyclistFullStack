@@ -13,6 +13,11 @@ exports.renderHomePage = (req, res) => {
     });
 };
 
+//Women's page GET
+exports.renderWomensPage = (req, res) => {
+    res.render('womenscycling.ejs', { title: "Canadian Cyclist | Women's Cyclists" });
+};
+
 //create GET
 exports.renderCreatePage = (req, res) => {
     res.render('create.ejs', { title: 'Canadian Cyclist | Create New Post' });

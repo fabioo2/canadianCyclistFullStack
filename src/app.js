@@ -31,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); //parse form data client
 
 app.use('/', router);
+
 app.listen(PORT, () => {
     console.log(`Server running on port: ${PORT}`);
 });
