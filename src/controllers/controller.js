@@ -15,7 +15,14 @@ exports.renderHomePage = (req, res) => {
 
 //Women's page GET
 exports.renderWomensPage = (req, res) => {
-    res.render('womenscycling.ejs', { title: "Canadian Cyclist | Women's Cyclists" });
+    res.render('womenscycling.ejs', {
+        title: "Canadian Cyclist | Women's Cyclists",
+    });
+};
+
+//Photo's page GET
+exports.renderPhotosPage = (req, res) => {
+    res.render('photos.ejs', { title: 'Canadian Cyclist | Photos' });
 };
 
 //create GET
