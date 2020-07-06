@@ -30,6 +30,11 @@
     width: 100%;
 }
 
+#carousel {
+    padding: 0;
+    margin: 0;
+}
+
 /* footer */
 .footer {
     background-color: red ;
