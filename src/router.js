@@ -4,6 +4,7 @@ const controller = require('./controllers/controller');
 
 router.get('/', controller.renderHomePage);
 router.get('/createPost', controller.renderCreatePage);
+router.get('/Womenscycling.ejs', controller.renderWomensPage);
 
 router.get('/createTable', controller.createTable);
 router.post('/add', controller.createPost);
