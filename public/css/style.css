@@ -35,6 +35,10 @@
     margin: 0;
 }
 
+.article-title {
+    width: 1000px;
+}
+
 /* footer */
 .footer {
     background-color: red ;

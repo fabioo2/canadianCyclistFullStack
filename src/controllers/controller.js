@@ -1,5 +1,6 @@
 exports.renderHomePage = (req, res) => {
-    let sql = 'SELECT * FROM `posts` ORDER BY id ASC';
+    let sql =
+        'select c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid order by creation_date desc limit 30';
 
     //execute query
     db.query(sql, (err, result) => {
