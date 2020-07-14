@@ -1,6 +1,6 @@
 exports.renderHomePage = (req, res) => {
     let sql =
-        'select c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid order by creation_date desc limit 30';
+        'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid order by creation_date desc limit 30';
 
     //execute query
     db.query(sql, (err, result) => {
@@ -8,6 +8,22 @@ exports.renderHomePage = (req, res) => {
             res.redirect('/');
         }
         res.render('index.ejs', {
+            title: 'Canadian Cyclist',
+            posts: result,
+        });
+    });
+};
+
+//Daily News GET ONE
+
+exports.renderArticlePage = (req, res) => {
+    let id = req.params.id;
+    let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid and c.id = ${id} order by creation_date desc limit 30`;
+    db.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('post.ejs', {
             title: 'Canadian Cyclist',
             posts: result,
         });

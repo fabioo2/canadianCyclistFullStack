@@ -6,8 +6,8 @@ router.get('/', controller.renderHomePage);
 router.get('/createPost', controller.renderCreatePage);
 router.get('/Womenscycling', controller.renderWomensPage);
 router.get('/photos', controller.renderPhotosPage);
+router.get('/dailynews/:id', controller.renderArticlePage);
 
-router.get('/createTable', controller.createTable);
 router.post('/add', controller.createPost);
 
 module.exports = router;

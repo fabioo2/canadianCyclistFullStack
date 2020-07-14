@@ -24,7 +24,7 @@
                                             <footer class="blockquote-footer"><cite><%= post.username %></cite></footer>
                                         </blockquote>
                                         <br>
-                                        <a href="" class="btn btn-outline-success">Read More</a>
+                                        <a href="../dailynews/<%= post.id %>" class="btn btn-outline-success">Read More</a>
                                         <a href="" class="btn btn-outline-danger"><i class="far fa-heart"></i></a>
                                     </div>
                                 </div>
@@ -48,10 +48,10 @@
                 <div class="cont">
                     <div id="list p-0">
                         <!--Article Lists-->
-                        <div class="list-group mt-1 mb-4 p-0" >
+                        <div class="list-group mt-1 mb-4 p-0 container"  >
                             <% const regularposts = posts.splice(0, 5) %> 
                             <% posts.forEach((post, index) => { %>                            
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <a href="../dailynews/<%= post.id %>" class="list-group-item list-group-item-action flex-column align-items-start post">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 class="article-title mb-1"><%= post.news_title %> </h5>
                                     <small><%= post.creation_date.toLocaleString() %></small>
