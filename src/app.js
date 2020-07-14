@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const router = require('./router');
 const app = express();
+const moment = require('moment');
+app.locals.moment = moment;
 
 const PORT = process.env.PORT || 5000;
 
@@ -31,6 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); //parse form data client
 
 app.use('/', router);
+
 app.listen(PORT, () => {
     console.log(`Server running on port: ${PORT}`);
 });

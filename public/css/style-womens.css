@@ -5,7 +5,14 @@
 /* navbar */
 @media screen and (max-width: 1000px){
     .last-link {
-        margin-bottom: 8px;
+        margin-bottom: 8px;   
+    }
+    #navbarNav {
+        background-color: #8054B4;
+        padding: 10px;
+    }
+    .nav-link {
+        color: white;
     }
 }
 /* featured articles */
@@ -30,23 +37,16 @@
     width: 100%;
 }
 
-#carousel {
-    padding: 0;
+.panel-title {
+    background-color: #8054B4;
     margin: 0;
-}
-
-.article-title {
-    width: 900px;
-}
-
-.article-date {
-    width: 200px;
-    text-align:right;
+    padding: 10px;
+    color: white;
 }
 
 /* footer */
 .footer {
-    background-color: red ;
+    background-color:#8054B4 ;
     color: white;
 }
 .footer a {
