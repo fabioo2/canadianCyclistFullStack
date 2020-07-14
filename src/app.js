@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const router = require('./router');
 const app = express();
+const moment = require('moment');
+app.locals.moment = moment;
 
 const PORT = process.env.PORT || 5000;
 

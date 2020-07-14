@@ -48,13 +48,13 @@
                 <div class="cont">
                     <div id="list p-0">
                         <!--Article Lists-->
-                        <div class="list-group mt-1 mb-4 p-0 container"  >
+                        <div class="list-group mt-1 mb-4 p-0 article"  >
                             <% const regularposts = posts.splice(0, 5) %> 
                             <% posts.forEach((post, index) => { %>                            
                             <a href="../dailynews/<%= post.id %>" class="list-group-item list-group-item-action flex-column align-items-start post">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="article-title mb-1"><%= post.news_title %> </h5>
-                                    <small><%= post.creation_date.toLocaleString() %></small>
+                                    <h6 class="article-title mb-1"><%= post.news_title %> </h6>
+                                    <small class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
                                 </div>
                                 <p class="mb-1"></p>
                                 <small class="text-muted"><%= post.username %></small>

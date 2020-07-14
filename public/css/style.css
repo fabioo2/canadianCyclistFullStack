@@ -36,8 +36,12 @@
 }
 
 .article-title {
-    width: 1000px;
-    margin-right: 5px;
+    width: 900px;
+}
+
+.article-date {
+    width: 200px;
+    text-align:right;
 }
 
 /* footer */
