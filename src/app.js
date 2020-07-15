@@ -4,6 +4,7 @@ const mysql = require('mysql');
 const router = require('./router');
 const app = express();
 const moment = require('moment');
+
 app.locals.moment = moment;
 
 const PORT = process.env.PORT || 5000;
@@ -23,7 +24,6 @@ db.connect((err) => {
     console.log('Connected to database');
 });
 global.db = db;
-
 //middleware
 app.set('port', process.env.PORT || PORT); // set express to use our port
 app.use(express.static('public'));
