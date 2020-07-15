@@ -42,6 +42,11 @@ exports.renderPhotosPage = (req, res) => {
     res.render('photos.ejs', { title: 'Canadian Cyclist | Photos' });
 };
 
+//Gallery page GET
+exports.renderGalleryPage = (req, res) => {
+    res.render('gallery.ejs', { title: 'Canadian Cyclist | Photos' });
+};
+
 //create GET
 exports.renderCreatePage = (req, res) => {
     res.render('create.ejs', { title: 'Canadian Cyclist | Create New Post' });

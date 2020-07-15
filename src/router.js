@@ -6,6 +6,7 @@ router.get('/', controller.renderHomePage);
 router.get('/createPost', controller.renderCreatePage);
 router.get('/Womenscycling', controller.renderWomensPage);
 router.get('/photos', controller.renderPhotosPage);
+router.get('/gallery', controller.renderGalleryPage);
 router.get('/dailynews/:id', controller.renderArticlePage);
 
 router.post('/add', controller.createPost);
