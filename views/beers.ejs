@@ -7,7 +7,7 @@
         <div class="col-lg-8">
             <% posts.forEach((post, index) => { %>
             <!-- Title -->
-            <h2 class="mt-4"><%- post.beer %></h1>
+            <h2 class="mt-4"><%- post.beer.replace(/\\'/g , "'") %></h1>
               
             <!-- Author -->
             <% if (post.reviewer) { %>
@@ -19,7 +19,7 @@
             <hr />
             <!-- Post Content -->
             <div id="full-article">
-                <%- post.description %>
+                <%- post.description.replace(/\\'/g , "'") %>
             </div>
             
             <br />
