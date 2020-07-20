@@ -19,25 +19,24 @@
 </div>
 
 <!-- gallery -->
-<div class="container text-center">
-    <h3>2019 Photos</h3>
-    <div class="list-group">
+<div class="container">
+    <div class="text-center">
+    <h3><%= posts[0].year_num %> Photos</h3>
         <% posts.forEach((post) => { %>
         <h5><%= post.event_title %></h5>
         <p><%= post.date_from.toLocaleDateString() %> to
             <%= post.date_to.toLocaleDateString() %> in <%= post.event_location %></p>
-            <p><%= post.event_sub_category %></p>
         <% }) %>
     </div>
-</div>
 
-<!-- Other option -->
-<hr class="mt-2 mb-2">
-<p class="font-weight-light">Copyright notice: The photos that appear on www.CanadianCyclist.com are all subject to
-    copyright, and MAY NOT be reproduced in any form, anywhere else without permission. Contact Canadian Cyclist to
-    request permission <a href=mailTo:editor@canadiancyclist.com> editor@canadiancyclist.com</a>.</p>
-<p class="font-weight-light">Copies of the photographs can be requested by contacting Canadian Cyclist <a
-        href=mailTo:editor@canadiancyclist.com>editor@canadiancyclist.com</a>.</p>
+
+    <!-- Other option -->
+    <hr class="mt-2 mb-2">
+    <p class="font-weight-light">Copyright notice: The photos that appear on www.CanadianCyclist.com are all subject to
+        copyright, and MAY NOT be reproduced in any form, anywhere else without permission. Contact Canadian Cyclist to
+        request permission <a href=mailTo:editor@canadiancyclist.com> editor@canadiancyclist.com</a>.</p>
+    <p class="font-weight-light">Copies of the photographs can be requested by contacting Canadian Cyclist <a
+            href=mailTo:editor@canadiancyclist.com>editor@canadiancyclist.com</a>.</p>
 </div>
 
 <%- include('partials/footer') %>

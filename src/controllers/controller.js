@@ -40,7 +40,8 @@ exports.renderWomensPage = (req, res) => {
 //Photo's page GET
 exports.renderPhotosPage = (req, res) => {
     let sql =
-        'select id, event_title, event_location, date_from, date_to from cc_event where date_from >= "2019-01-01"';
+        'select distinct year(date_from) as year_num from cc_event where year(date_from) >= 2005 order by year_num desc';
+    
     //execute query
     db.query(sql, (err, result) => {
         if (err) {
@@ -55,8 +56,8 @@ exports.renderPhotosPage = (req, res) => {
 
 // Event's page GET for the given year
 exports.renderEventPage = (req, res) => {
-    //let id = req.params.id;
-    let sql = 'select e.id, e.event_title, e.event_location, e.date_from, e.date_to, s.id, s.event_sub_category from cc_event e join cc_event_subcategory s where e.id=s.cc_event_id and date_from >= "2019-01-01"';
+    let year_num = req.params.year_num;
+    let sql = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, s.id, s.event_sub_category, year(e.date_from) as year_num from cc_event e join cc_event_subcategory s where e.id=s.cc_event_id and year(e.date_from) = ${year_num} group by e.id order by e.date_from desc`;
 
     //execute query
     db.query(sql, (err, result) => {
