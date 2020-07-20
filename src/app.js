@@ -4,25 +4,28 @@ const mysql = require('mysql');
 const router = require('./router');
 const app = express();
 const moment = require('moment');
+
 app.locals.moment = moment;
 
 const PORT = process.env.PORT || 5000;
 
 const dbConfig = require('./config/dbConfig');
-const db = mysql.createConnection({
+const pool = mysql.createPool({
+    connectionLimit: 10,
     host: dbConfig.HOST,
     user: dbConfig.USER,
     password: dbConfig.PASSWORD,
     database: dbConfig.DB,
 });
 
-db.connect((err) => {
+pool.getConnection((err) => {
     if (err) {
         throw err;
     }
     console.log('Connected to database');
 });
-global.db = db;
+
+global.pool = pool;
 
 //middleware
 app.set('port', process.env.PORT || PORT); // set express to use our port

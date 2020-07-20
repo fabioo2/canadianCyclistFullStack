@@ -44,6 +44,13 @@
     text-align:right;
 }
 
+/* full article */
+
+#full-article img {
+    max-width: 100%;
+    height: auto;
+}
+
 /* footer */
 .footer {
     background-color: red ;

@@ -1,9 +1,9 @@
+//Daily News GET ALL
 exports.renderHomePage = (req, res) => {
     let sql =
         'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid order by creation_date desc limit 30';
-
     //execute query
-    db.query(sql, (err, result) => {
+    pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
@@ -19,7 +19,8 @@ exports.renderHomePage = (req, res) => {
 exports.renderArticlePage = (req, res) => {
     let id = req.params.id;
     let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid and c.id = ${id} order by creation_date desc limit 30`;
-    db.query(sql, (err, result) => {
+
+    pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
@@ -30,10 +31,47 @@ exports.renderArticlePage = (req, res) => {
     });
 };
 
-//Women's page GET
+//Beer's page GET ALL
+exports.renderBeersPage = (req, res) => {
+    let sql = 'select * from cc_beer limit 25';
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('beers.ejs', {
+            title: 'Canadian Cyclist | Beers',
+            posts: result,
+        });
+    });
+};
+
+//Women's page GET ALL
 exports.renderWomensPage = (req, res) => {
+    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
     res.render('womenscycling.ejs', {
         title: "Canadian Cyclist | Women's Cyclists",
+        posts: result,
+        });
+    });
+};
+
+//Womens Article GET ONE
+
+exports.renderWomensArticlePage = (req, res) => {
+    let id = req.params.id;
+    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('womenspost.ejs', {
+            title: "Canadian Cyclist | Women's Cyclists",
+            posts: result,
+        });
     });
 };
 
@@ -43,7 +81,7 @@ exports.renderPhotosPage = (req, res) => {
         'select distinct year(date_from) as year_num from cc_event where year(date_from) >= 2005 order by year_num desc';
     
     //execute query
-    db.query(sql, (err, result) => {
+    pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
@@ -60,7 +98,7 @@ exports.renderEventPage = (req, res) => {
     let sql = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, s.id, s.event_sub_category, year(e.date_from) as year_num from cc_event e join cc_event_subcategory s where e.id=s.cc_event_id and year(e.date_from) = ${year_num} group by e.id order by e.date_from desc`;
 
     //execute query
-    db.query(sql, (err, result) => {
+    pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
@@ -75,37 +113,39 @@ exports.renderEventPage = (req, res) => {
     exports.renderGalleryPage = (req, res) => {
         res.render('gallery.ejs', { title: 'Canadian Cyclist | Photos' });
     };
+    res.render('photos.ejs', { title: 'Canadian Cyclist | Photos' });
+};
 
-    //create GET
-    exports.renderCreatePage = (req, res) => {
-        res.render('create.ejs', { title: 'Canadian Cyclist | Create New Post' });
-    };
+//create GET
+//exports.renderCreatePage = (req, res) => {
+//    res.render('create.ejs', { title: 'Canadian Cyclist | Create New Post' });
+//};
 
-    //create Table
-    exports.createTable = (req, res) => {
-        let sql =
-            'CREATE TABLE posts2 (id int AUTO_INCREMENT, author VARCHAR(255), title VARCHAR(255), content text, date DATE, Primary Key (Id))';
-        db.query(sql, (err, result) => {
-            if (err) throw err;
-            console.log(result);
-            res.send('posts2 Table created');
-        });
-    };
+//create Table
+// exports.createTable = (req, res) => {
+//     let sql =
+//         'CREATE TABLE posts2 (id int AUTO_INCREMENT, author VARCHAR(255), title VARCHAR(255), content text, date DATE, Primary Key (Id))';
+//     db.query(sql, (err, result) => {
+//         if (err) throw err;
+//         console.log(result);
+//         res.send('posts2 Table created');
+//     });
+// };
 
-    //create POST
-    exports.createPost = (req, res) => {
-        let message = '';
-        let author = req.body.author;
-        let title = req.body.title;
-        let content = req.body.content;
-        let date = req.body.date;
+// //create POST
+// exports.createPost = (req, res) => {
+//     let message = '';
+//     let author = req.body.author;
+//     let title = req.body.title;
+//     let content = req.body.content;
+//     let date = req.body.date;
 
-        let sql = `INSERT INTO posts (author, title, content, date) VALUES ('${author}', '${title}', '${content}', '${date}')`;
+//     let sql = `INSERT INTO posts (author, title, content, date) VALUES ('${author}', '${title}', '${content}', '${date}')`;
 
-        db.query(sql, (err, result) => {
-            if (err) {
-                return res.status(500).send(err);
-            }
-            res.redirect('/');
-        });
-    };
+//     db.query(sql, (err, result) => {
+//         if (err) {
+//             return res.status(500).send(err);
+//         }
+//         res.redirect('/');
+//     });
+// };

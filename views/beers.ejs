@@ -2,39 +2,42 @@
 
 <div class="container">
     <div class="row">
+
         <!-- Post Content Column -->
         <div class="col-lg-8">
+            <% posts.forEach((post, index) => { %>
             <!-- Title -->
-            <h1 class="mt-4"><%- posts[0].news_title %></h1>
-
+            <h2 class="mt-4"><%- post.beer.replace(/\\'/g , "'") %></h1>
+              
             <!-- Author -->
-            <p class="lead">
-                by
-                <a href="#"><%- posts[0].username %></a>
-            </p>
-
+            <% if (post.reviewer) { %>
+                <p class="lead">
+                    by
+                    <a href="#"><%- post.reviewer %></a>
+                </p>
+            <% } %>
             <hr />
-
-            <!-- Date/Time -->
-            <p>Posted on <%- posts[0].creation_date.toLocaleString()%>></p>
-
-            <hr />
-
-            <!-- Preview Image -->
-            <img
-                class="img-fluid rounded"
-                src="http://placehold.it/900x300"
-                alt=""
-            />
-
-            <hr />
-
             <!-- Post Content -->
             <div id="full-article">
-                <%- posts[0].news_content %>
+                <%- post.description.replace(/\\'/g , "'") %>
             </div>
+            
+            <br />
+        
+            <% if (post.phone) { %>
+                <p><span class="font-weight-bold">Phone: </span><%- post.phone %></p>
+            <% } %>
+
+            <% if (post.url) { %>
+                <p><span class="font-weight-bold">Website: </span><%- post.url %></p>
+            <% } %>
 
             <hr />
+            <br />
+            <br />
+
+            <% }) %>
+
         </div>
 
         <!-- Sidebar Widgets Column -->
@@ -60,4 +63,5 @@
     </div>
     <!-- /.row -->
 </div>
+
 <%- include('partials/footer') %>
