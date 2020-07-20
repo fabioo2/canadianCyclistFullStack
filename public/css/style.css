@@ -44,6 +44,11 @@
     text-align:right;
 }
 
+#featured-image {
+    max-width: 100%;
+    height: auto;
+}
+
 /* full article */
 
 #full-article img {
