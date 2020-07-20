@@ -1,9 +1,9 @@
+//Daily News GET ALL
 exports.renderHomePage = (req, res) => {
     let sql =
         'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid order by creation_date desc limit 30';
-
     //execute query
-    db.query(sql, (err, result) => {
+    pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
@@ -19,12 +19,27 @@ exports.renderHomePage = (req, res) => {
 exports.renderArticlePage = (req, res) => {
     let id = req.params.id;
     let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid and c.id = ${id} order by creation_date desc limit 30`;
-    db.query(sql, (err, result) => {
+
+    pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
         res.render('post.ejs', {
             title: 'Canadian Cyclist',
+            posts: result,
+        });
+    });
+};
+
+//Beer's page GET ALL
+exports.renderBeersPage = (req, res) => {
+    let sql = 'select * from cc_beer limit 25';
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('beers.ejs', {
+            title: 'Canadian Cyclist | Beers',
             posts: result,
         });
     });
@@ -48,30 +63,30 @@ exports.renderCreatePage = (req, res) => {
 };
 
 //create Table
-exports.createTable = (req, res) => {
-    let sql =
-        'CREATE TABLE posts2 (id int AUTO_INCREMENT, author VARCHAR(255), title VARCHAR(255), content text, date DATE, Primary Key (Id))';
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        res.send('posts2 Table created');
-    });
-};
+// exports.createTable = (req, res) => {
+//     let sql =
+//         'CREATE TABLE posts2 (id int AUTO_INCREMENT, author VARCHAR(255), title VARCHAR(255), content text, date DATE, Primary Key (Id))';
+//     db.query(sql, (err, result) => {
+//         if (err) throw err;
+//         console.log(result);
+//         res.send('posts2 Table created');
+//     });
+// };
 
-//create POST
-exports.createPost = (req, res) => {
-    let message = '';
-    let author = req.body.author;
-    let title = req.body.title;
-    let content = req.body.content;
-    let date = req.body.date;
+// //create POST
+// exports.createPost = (req, res) => {
+//     let message = '';
+//     let author = req.body.author;
+//     let title = req.body.title;
+//     let content = req.body.content;
+//     let date = req.body.date;
 
-    let sql = `INSERT INTO posts (author, title, content, date) VALUES ('${author}', '${title}', '${content}', '${date}')`;
+//     let sql = `INSERT INTO posts (author, title, content, date) VALUES ('${author}', '${title}', '${content}', '${date}')`;
 
-    db.query(sql, (err, result) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.redirect('/');
-    });
-};
+//     db.query(sql, (err, result) => {
+//         if (err) {
+//             return res.status(500).send(err);
+//         }
+//         res.redirect('/');
+//     });
+// };

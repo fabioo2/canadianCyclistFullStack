@@ -11,7 +11,7 @@
                         <li data-target="#slides" data-slide-to="2"> </li>
                     </ol>
                     <div class="carousel-inner p-0 m-0">
-                        <% const featuredposts = posts.slice(0,5) %>
+                        <% const featuredposts = posts.splice(0, 5) %> 
                         <% featuredposts.forEach((post, index) => { %>
                         <div class="carousel-item  <% if (index == 0) { %>  active <% } %>" style="padding: 0;"  > 
                             <div class="col-lg-12 mb-4 mt-1 p-0" >
@@ -24,8 +24,7 @@
                                             <footer class="blockquote-footer"><cite><%= post.username %></cite></footer>
                                         </blockquote>
                                         <br>
-                                        <a href="../dailynews/<%= post.id %>" class="btn btn-outline-success">Read More</a>
-                                        <a href="" class="btn btn-outline-danger"><i class="far fa-heart"></i></a>
+                                        <a href="../dailynews/<%= post.id %>" class="btn bg-success text-white w-100">Read More</a>
                                     </div>
                                 </div>
                             </div>
@@ -49,14 +48,12 @@
                     <div id="list p-0">
                         <!--Article Lists-->
                         <div class="list-group mt-1 mb-4 p-0 article"  >
-                            <% const regularposts = posts.splice(0, 5) %> 
                             <% posts.forEach((post, index) => { %>                            
                             <a href="../dailynews/<%= post.id %>" class="list-group-item list-group-item-action flex-column align-items-start post">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="article-title mb-1"><%= post.news_title %> </h6>
                                     <small class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
                                 </div>
-                                <p class="mb-1"></p>
                                 <small class="text-muted"><%= post.username %></small>
                             </a>
                             <% }) %>  
