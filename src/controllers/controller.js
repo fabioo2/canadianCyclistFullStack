@@ -47,14 +47,15 @@ exports.renderBeersPage = (req, res) => {
 
 //Women's page GET ALL
 exports.renderWomensPage = (req, res) => {
-    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
+    let sql =
+        'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
-    res.render('womenscycling.ejs', {
-        title: "Canadian Cyclist | Women's Cyclists",
-        posts: result,
+        res.render('womenscycling.ejs', {
+            title: "Canadian Cyclist | Women's Cyclists",
+            posts: result,
         });
     });
 };
@@ -63,7 +64,8 @@ exports.renderWomensPage = (req, res) => {
 
 exports.renderWomensArticlePage = (req, res) => {
     let id = req.params.id;
-    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
+    let sql =
+        'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
@@ -79,7 +81,7 @@ exports.renderWomensArticlePage = (req, res) => {
 exports.renderPhotosPage = (req, res) => {
     let sql =
         'select distinct year(date_from) as year_num from cc_event where year(date_from) >= 2005 order by year_num desc';
-    
+
     //execute query
     pool.query(sql, (err, result) => {
         if (err) {
@@ -109,11 +111,9 @@ exports.renderEventPage = (req, res) => {
     });
 };
 
-    //Gallery page GET
-    exports.renderGalleryPage = (req, res) => {
-        res.render('gallery.ejs', { title: 'Canadian Cyclist | Photos' });
-    };
-    res.render('photos.ejs', { title: 'Canadian Cyclist | Photos' });
+//Gallery page GET
+exports.renderGalleryPage = (req, res) => {
+    res.render('gallery.ejs', { title: 'Canadian Cyclist | Photos' });
 };
 
 //create GET
