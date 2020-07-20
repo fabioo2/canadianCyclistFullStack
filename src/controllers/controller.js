@@ -45,10 +45,33 @@ exports.renderBeersPage = (req, res) => {
     });
 };
 
-//Women's page GET
+//Women's page GET ALL
 exports.renderWomensPage = (req, res) => {
+    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
     res.render('womenscycling.ejs', {
         title: "Canadian Cyclist | Women's Cyclists",
+        posts: result,
+        });
+    });
+};
+
+//Womens Article GET ONE
+
+exports.renderWomensArticlePage = (req, res) => {
+    let id = req.params.id;
+    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('womenspost.ejs', {
+            title: "Canadian Cyclist | Women's Cyclists",
+            posts: result,
+        });
     });
 };
 
