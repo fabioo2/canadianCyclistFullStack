@@ -33,7 +33,7 @@ exports.renderArticlePage = (req, res) => {
 
 //Beer's page GET ALL
 exports.renderBeersPage = (req, res) => {
-    let sql = 'select * from cc_beer limit 25';
+    let sql = 'select * from cc_beer order by id desc limit 25';
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');

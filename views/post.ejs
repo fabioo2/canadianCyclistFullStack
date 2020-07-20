@@ -31,7 +31,7 @@
 
             <!-- Post Content -->
             <div id="full-article">
-                <%- posts[0].news_content %>
+                <%- posts[0].news_content.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/') %>
             </div>
 
             <hr />
