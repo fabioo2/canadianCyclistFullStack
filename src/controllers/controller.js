@@ -97,24 +97,45 @@ exports.renderPhotosPage = (req, res) => {
 // Event's page GET for the given year
 exports.renderEventPage = (req, res) => {
     let year_num = req.params.year_num;
-    let sql = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, s.id, s.event_sub_category, year(e.date_from) as year_num from cc_event e join cc_event_subcategory s where e.id=s.cc_event_id and year(e.date_from) = ${year_num} group by e.id order by e.date_from desc`;
-
+    let sql = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, year(e.date_from) as year_num from cc_event e where year(e.date_from) = ${year_num} group by e.id order by e.date_from desc`;
+    let sql2 = `select s.id, s.cc_event_id, s.event_sub_category, e.event_title from cc_event_subcategory s join cc_event e where s.cc_event_id = e.id and year(e.date_from) = ${year_num} order by e.date_from desc`
     //execute query
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('event.ejs', {
-            title: 'Canadian Cyclist',
-            posts: result,
+        pool.query(sql2, (err2, result2) => {
+            if (err2) {
+                res.redirect('/');
+            }
+            res.render('event.ejs', {
+                title: 'Canadian Cyclist',
+                posts: result,
+                types: result2
+            });
         });
     });
 };
 
-//Gallery page GET
-exports.renderGalleryPage = (req, res) => {
-    res.render('gallery.ejs', { title: 'Canadian Cyclist | Photos' });
-};
+    //Gallery page GET
+    exports.renderGalleryPage = (req, res) => {
+        let year_num = req.params.year_num;
+        let event_title = req.params.event_title;
+        let id = req.params.id;
+        let sql = `select * from cc_photo p join cc_event_subcategory s join cc_event e where p.cc_event_subcategory_id = s.id and p.cc_event_id = e.id and s.id = 404573`;
+        //let sql2 = `select distinct s.event_sub_category from cc_photo p join cc_event_subcategory s join cc_event e where p.cc_event_subcategory_id = s.id and p.cc_event_id = e.id and e.id = 773`;
+
+        //execute query
+        pool.query(sql, (err, result) => {
+            if (err) {
+                res.redirect('/');
+            }
+            res.render('gallery.ejs', {
+                title: 'Canadian Cyclist',
+                posts: result,
+            });
+        });
+    };
 
 //create GET
 //exports.renderCreatePage = (req, res) => {

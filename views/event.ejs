@@ -21,12 +21,19 @@
 <!-- gallery -->
 <div class="container">
     <div class="text-center">
-    <h3><%= posts[0].year_num %> Photos</h3>
-        <% posts.forEach((post) => { %>
-        <h5><%= post.event_title %></h5>
-        <p><%= post.date_from.toLocaleDateString() %> to
-            <%= post.date_to.toLocaleDateString() %> in <%= post.event_location %></p>
-        <% }) %>
+        <h3><%= posts[0].year_num %> Photos</h3>
+        <% for (var i = 0; i < posts.length; i++) { %>
+        <h5><%= posts[i].event_title %></h5>
+        <p><%= posts[i].date_from.toLocaleDateString() %> to
+            <%= posts[i].date_to.toLocaleDateString() %> in <%= posts[i].event_location %></p>
+            <% for (var j = 0; j < types.length; j++) { %>
+                <% if (types[j].cc_event_id == posts[i].id) { %>
+                    <a href="/gallery">
+                        <p><%= types[j].event_sub_category %></p>
+                    </a>
+                <% } %>
+            <% } %>
+        <% } %>
     </div>
 
 
