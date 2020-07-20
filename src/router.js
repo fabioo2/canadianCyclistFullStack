@@ -10,6 +10,10 @@ router.get('/Womenscycling', controller.renderWomensPage);
 router.get('/Womenscycling/:id', controller.renderWomensArticlePage);
 
 router.get('/photos', controller.renderPhotosPage);
+router.get('/photos/:year_num', controller.renderEventPage);
+
+router.get('/gallery', controller.renderGalleryPage);
+
 router.get('/beers', controller.renderBeersPage);
 // router.post('/add', controller.createPost);
 

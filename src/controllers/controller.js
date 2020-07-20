@@ -77,13 +77,49 @@ exports.renderWomensArticlePage = (req, res) => {
 
 //Photo's page GET
 exports.renderPhotosPage = (req, res) => {
+    let sql =
+        'select distinct year(date_from) as year_num from cc_event where year(date_from) >= 2005 order by year_num desc';
+    
+    //execute query
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('photos.ejs', {
+            title: 'Canadian Cyclist',
+            posts: result,
+        });
+    });
+};
+
+// Event's page GET for the given year
+exports.renderEventPage = (req, res) => {
+    let year_num = req.params.year_num;
+    let sql = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, s.id, s.event_sub_category, year(e.date_from) as year_num from cc_event e join cc_event_subcategory s where e.id=s.cc_event_id and year(e.date_from) = ${year_num} group by e.id order by e.date_from desc`;
+
+    //execute query
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('event.ejs', {
+            title: 'Canadian Cyclist',
+            posts: result,
+        });
+    });
+};
+
+    //Gallery page GET
+    exports.renderGalleryPage = (req, res) => {
+        res.render('gallery.ejs', { title: 'Canadian Cyclist | Photos' });
+    };
     res.render('photos.ejs', { title: 'Canadian Cyclist | Photos' });
 };
 
 //create GET
-exports.renderCreatePage = (req, res) => {
-    res.render('create.ejs', { title: 'Canadian Cyclist | Create New Post' });
-};
+//exports.renderCreatePage = (req, res) => {
+//    res.render('create.ejs', { title: 'Canadian Cyclist | Create New Post' });
+//};
 
 //create Table
 // exports.createTable = (req, res) => {
