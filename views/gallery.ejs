@@ -2,15 +2,16 @@
 
 <!--content-->
 <div class="container">
-  <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Milton Track World Cup: Team Canada</h1>
+  <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0"><%= posts[0].event_title %>: <%= posts[0].event_sub_category %></h1>
   <hr class="mt-2 mb-5">
 
   <div class="row text-center text-lg-left">
     <% posts.forEach((post) => { %>
     <div class="d-block col-md-4 col-6 mb-4">
-      <a href="http://www.canadiancyclist.com/<%= post.photo_location %>" data-size="1600x1067">
-        <img class="img-fluid img-thumbnail" src="<%= post.photo_location.replace(/(..)/g , 'http://www.canadiancyclist.com/' %>"
-          alt="photo">
+      <a href="<%= post.photo_location.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/') %>"
+        data-size="1600x1067">
+        <img class="img-fluid img-thumbnail"
+          src="<%= post.photo_location.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/') %>">
       </a>
     </div>
     <% }) %>
@@ -36,6 +37,11 @@
   <p class="font-weight-light text-center text-lg-left mt-1 mb-0">
     <%= posts[0].event_title %> <%= posts[0].date_from.toLocaleDateString() %> to
     <%= posts[0].date_to.toLocaleDateString() %> in <%= posts[0].event_location %></p>
+  <% types.forEach((type) => { %>
+  <a href="/photos/<%= types[0].year_num %>/<%= types[0].cc_event_id %>/<%= type.id %>">
+    <p><%= type.event_sub_category %></p>
+  </a>
+  <% }) %>
 
   <hr class="mt-2 mb-2">
   <p class="font-weight-light">Copyright notice: The photos that appear on www.CanadianCyclist.com are all subject to

@@ -28,7 +28,7 @@
             <%= posts[i].date_to.toLocaleDateString() %> in <%= posts[i].event_location %></p>
             <% for (var j = 0; j < types.length; j++) { %>
                 <% if (types[j].cc_event_id == posts[i].id) { %>
-                    <a href="/gallery">
+                    <a href="../photos/<%= posts[i].year_num %>/<%= types[j].cc_event_id %>/<%= types[j].id %>">
                         <p><%= types[j].event_sub_category %></p>
                     </a>
                 <% } %>
