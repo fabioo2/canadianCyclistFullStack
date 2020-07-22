@@ -10,8 +10,9 @@
     <div class="d-block col-md-4 col-6 mb-4">
       <a href="<%= post.photo_location.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/') %>"
         data-size="1600x1067">
+        <% let chars = {'../' : 'http://www.canadiancyclist.com/', '/pages/' : '/thumbnails/', '.htm' : '.jpg'}; %>
         <img class="img-fluid img-thumbnail"
-          src="<%= post.photo_location.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/') %>">
+          src="<%= post.photo_location.replace(/../|/pages/|.htm/g , function(match) {return chars[match];}) %>">
       </a>
     </div>
     <% }) %>

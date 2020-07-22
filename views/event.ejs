@@ -21,7 +21,7 @@
 <!-- gallery -->
 <div class="container">
     <div class="text-center">
-        <h3><%= posts[0].year_num %> Photos</h3>
+        <h2 class="mb-4"><%= posts[0].year_num %> Photos</h2>
         <% for (var i = 0; i < posts.length; i++) { %>
         <h5><%= posts[i].event_title %></h5>
         <p><%= posts[i].date_from.toLocaleDateString() %> to
