@@ -2,42 +2,39 @@
 
 <!--content-->
 <div class="container">
-  <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0"><%= posts[0].event_title %>: <%= posts[0].event_sub_category %></h1>
+  <!-- display the title of event and name of the event subcategory following to the url-->
+  <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0"><%= posts[0].event_title %>:
+    <%= posts[0].event_sub_category %></h1>
   <hr class="mt-2 mb-5">
 
   <div class="row text-center text-lg-left">
+    <!-- get all location of the photo -->
     <% posts.forEach((post) => { %>
-    <div class="d-block col-md-4 col-6 mb-4">
-      <a href="<%= post.photo_location.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/') %>"
-        data-size="1600x1067">
-        <% let chars = {'../' : 'http://www.canadiancyclist.com/', '/pages/' : '/thumbnails/', '.htm' : '.jpg'}; %>
-        <img class="img-fluid img-thumbnail"
-          src="<%= post.photo_location.replace(/../|/pages/|.htm/g , function(match) {return chars[match];}) %>">
+    <div class="d-block col-lg-2 col-md-3 col-4 mb-4">
+      <!-- replace the location of the photo -->
+      <!-- photo_location from the database is not direct link to get photos -->
+      <!-- it is needed to replace ../ to http://www.canadiancyclsit.com/ -->
+      <!-- and replace pages to thumbnails -->
+      <!-- and replace htm to jpg -->
+      <!-- the replaced string is referred as str3 and this is used in img tag -->
+      <% let str = post.photo_location; %>
+      <% let str1 = str.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/'); %>
+      <% let str2 = str1.replace(/pages/ , 'thumbnails'); %>
+      <% let str3 = str2.replace(/(\.)htm/g , '.jpg'); %>
+      <a href="<%= post.photo_location.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/') %>">
+        <img class="img-fluid img-thumbnail" src="<%= str3 %>">
       </a>
     </div>
     <% }) %>
-
-    <div class="d-block col-md-4 col-6 mb-4">
-      <a href="/assets/img/photo1.jpg" data-size="1600x1067">
-        <img class="img-fluid img-thumbnail" src="/assets/img/photo1.jpg" alt="photo">
-      </a>
-    </div>
-    <div class="d-block col-md-4 col-6 mb-4">
-      <a href="/assets/img/photo1.jpg" data-size="1600x1067">
-        <img class="img-fluid img-thumbnail" src="/assets/img/photo1.jpg" alt="photo">
-      </a>
-    </div>
-    <div class="d-block col-md-4 col-6 mb-4">
-      <a href="/assets/img/photo1.jpg" data-size="1600x1067">
-        <img class="img-fluid img-thumbnail" src="/assets/img/photo1.jpg" alt="photo">
-      </a>
-    </div>
   </div>
 
   <h3 class="font-weight-semibold text-center text-lg-left mt-2 mb-0">Related Galleries</h3>
+  <!-- get the selected event_title, date_from, date_to, and event_location -->
   <p class="font-weight-light text-center text-lg-left mt-1 mb-0">
     <%= posts[0].event_title %> <%= posts[0].date_from.toLocaleDateString() %> to
     <%= posts[0].date_to.toLocaleDateString() %> in <%= posts[0].event_location %></p>
+    <!-- display each of subcategory of the event -->
+    <!-- redirect to the link -->
   <% types.forEach((type) => { %>
   <a href="/photos/<%= types[0].year_num %>/<%= types[0].cc_event_id %>/<%= type.id %>">
     <p><%= type.event_sub_category %></p>
@@ -50,7 +47,9 @@
     request permission <a href=mailTo:editor@canadiancyclist.com> editor@canadiancyclist.com</a>.</p>
   <p class="font-weight-light">Copies of the photographs can be requested by contacting Canadian Cyclist <a
       href=mailTo:editor@canadiancyclist.com>editor@canadiancyclist.com</a>.</p>
-  <a href="#">Return to Main Photo page</a>
+  <a href="/photos">
+    <p>Return to Main Photo page</p>
+  </a>
 </div>
 
 <%- include('partials/footer') %>

@@ -1,11 +1,5 @@
 <%- include('partials/header') %>
 
-
-<!--<h2 class="text-center text-lg-left mt-4 mb-3">Photos</h2>
-        <p class="font-weight-light"></p>
-        <p class="font-weight-light">
-        <hr class="mt-2 mb-2">-->
-
 <!--Jumbotron-->
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -21,29 +15,35 @@
 <!-- gallery -->
 <div class="container">
     <div class="text-center">
+        <!-- display the year on the url for the heading -->
         <h2 class="mb-4"><%= posts[0].year_num %> Photos</h2>
+        <!-- get all distinct event title, date_from, date_to, and event_location for the selected year -->
         <% for (var i = 0; i < posts.length; i++) { %>
         <h5><%= posts[i].event_title %></h5>
         <p><%= posts[i].date_from.toLocaleDateString() %> to
             <%= posts[i].date_to.toLocaleDateString() %> in <%= posts[i].event_location %></p>
-            <% for (var j = 0; j < types.length; j++) { %>
-                <% if (types[j].cc_event_id == posts[i].id) { %>
-                    <a href="../photos/<%= posts[i].year_num %>/<%= types[j].cc_event_id %>/<%= types[j].id %>">
-                        <p><%= types[j].event_sub_category %></p>
-                    </a>
-                <% } %>
-            <% } %>
+        <!-- get all sub_category of the selected event -->
+        <!-- pass year, event_id, and sub_category_id on url -->
+        <% for (var j = 0; j < types.length; j++) { %>
+        <% if (types[j].cc_event_id == posts[i].id) { %>
+        <a href="../photos/<%= posts[i].year_num %>/<%= types[j].cc_event_id %>/<%= types[j].id %>">
+            <p><%= types[j].event_sub_category %></p>
+        </a>
+        <% } %>
+        <% } %>
         <% } %>
     </div>
 
-
-    <!-- Other option -->
+    <!-- copyright -->
     <hr class="mt-2 mb-2">
     <p class="font-weight-light">Copyright notice: The photos that appear on www.CanadianCyclist.com are all subject to
         copyright, and MAY NOT be reproduced in any form, anywhere else without permission. Contact Canadian Cyclist to
         request permission <a href=mailTo:editor@canadiancyclist.com> editor@canadiancyclist.com</a>.</p>
     <p class="font-weight-light">Copies of the photographs can be requested by contacting Canadian Cyclist <a
             href=mailTo:editor@canadiancyclist.com>editor@canadiancyclist.com</a>.</p>
+    <a href="/photos">
+        <p>Return to Main Photo page</p>
+    </a>
 </div>
 
 <%- include('partials/footer') %>
