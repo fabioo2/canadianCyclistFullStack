@@ -1,11 +1,5 @@
 <%- include('partials/header') %>
 
-
-<!--<h2 class="text-center text-lg-left mt-4 mb-3">Photos</h2>
-        <p class="font-weight-light"></p>
-        <p class="font-weight-light">
-        <hr class="mt-2 mb-2">-->
-
 <!--Jumbotron-->
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -22,6 +16,8 @@
 <div class="container">
     <h3>Video Interviews</h3>
     <p><a href="https://www.youtube.com/user/ccyclist">Link</a> to all videos posted.</p>
+    <!-- get all distinct years of date_from from the event table -->
+    <!-- pass the selected year on url -->
     <h3>Photo Archive</h3>
     <div class="row">
         <% posts.forEach((post) => { %>
@@ -31,7 +27,7 @@
         <% }) %>
     </div>
 
-    <!-- Other option -->
+    <!-- copyright -->
     <hr class="mt-2 mb-2">
     <p class="font-weight-light">Copyright notice: The photos that appear on www.CanadianCyclist.com are all subject to
         copyright, and MAY NOT be reproduced in any form, anywhere else without permission. Contact Canadian Cyclist to
