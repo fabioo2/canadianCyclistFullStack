@@ -1,20 +1,20 @@
 <%- include('partials/header') %>
 <div class="container">
-    <section id="main p-0">
-        <div class="cont">
+    <section id="main p-0 ">
+        <div class="cont mb-3">
             <div id="list p-0 m-0">
                 <!--Article Lists-->
                 <h3 class="text-center list-group-item list-group-item-action flex-column align-items-start post bg-light">Search Results</h3>
                 <div class="list-group m-0 pt-0 article"  >
-                         
-                    <a href="" class="list-group-item list-group-item-action flex-column align-items-start post">
+                    <% posts.forEach((post, index) => { %>                            
+                    <a href="../dailynews/<%= post.id %>" class="list-group-item list-group-item-action flex-column align-items-start post <% if (index % 2 == 0) { %>  bg-light <% } %>">
                         <div class="d-flex w-100 justify-content-between">
-                            <h6 class="article-title mb-1"></h6>
-                            <small class="article-date"></small>
+                            <h6 class="article-title mb-1"><%= post.news_title %> </h6>
+                            <small class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
                         </div>
-                        <small class="text-muted"></small>
+                        <small class="text-muted"><%= post.username %></small>
                     </a>
-
+                    <% }) %>  
                 </div>                      
             </div>
         </div>
