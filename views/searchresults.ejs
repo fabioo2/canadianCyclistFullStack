@@ -4,7 +4,9 @@
         <div class="cont mb-3">
             <div id="list p-0 m-0">
                 <!--Article Lists-->
-                <h3 class="text-center list-group-item list-group-item-action flex-column align-items-start post bg-light">Search Results</h3>
+                <h3 class="text-center list-group-item list-group-item-action flex-column align-items-start post bg-light">Search Results for <%- search %></h3>
+                <h5 class="text-center list-group-item list-group-item-action flex-column align-items-start post bg-light">Showing <%- posts.length  %> Results</h5>
+
                 <div class="list-group m-0 pt-0 article"  >
                     <% posts.forEach((post, index) => { %>                            
                     <a href="../dailynews/<%= post.id %>" class="list-group-item list-group-item-action flex-column align-items-start post <% if (index % 2 == 0) { %>  bg-light <% } %>">

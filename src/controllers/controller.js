@@ -152,16 +152,18 @@ exports.renderSearchPage = (req, res) => {
 exports.renderSearchResultsPage = (req, res) => {
     let year = req.body.yearSelect;
     let month = req.body.monthSelect;
-    let search = `%${req.body.searchInput}%`;
+    let search = req.body.searchInput;
+    let searchWildcard = `%${req.body.searchInput}%`;
     let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid AND MONTH(creation_date) LIKE ${pool.escape(month)} AND YEAR(creation_date) LIKE ${pool.escape(year)} AND news_content LIKE ${pool.escape(
-        search
-    )} order by creation_date desc limit 100`;
+        searchWildcard
+    )} order by creation_date desc limit 50`;
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
         res.render('searchresults.ejs', {
             title: 'Canadian Cyclist',
+            search: search,
             posts: result,
         });
     });

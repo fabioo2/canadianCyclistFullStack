@@ -65,7 +65,12 @@
     color: white;
 }
 
+
 /* search */
+
+#search-window {
+    height: 100vh;
+}
 
 #search-box {
     box-shadow:

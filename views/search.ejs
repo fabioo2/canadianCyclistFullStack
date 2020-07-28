@@ -1,40 +1,43 @@
 <%- include('partials/header') %>
-<div class="container mb-5 pb-3 pt-3 bg-light" id="search-box">
-    <form action="/search/results" method="post">
-        <div class="form-group">
-            <label for="yearSelect">Year</label>
-            <select class="form-control" name="yearSelect" id="yearSelect">
-                <option value="%">Every Year</option>
-                <% const currentYear = new Date().getFullYear(); %>
-                <% for (i = currentYear; i >= 1997; i-- ) { %>
-                    <option value="<%- i %>"><%- i %></option>
-                <% }; %>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="monthSelect">Month</label>
-            <select class="form-control" name="monthSelect" id="monthSelect">
-                <option value="%">Any Month</option>
-                <option value="1">January</option>  
-                <option value="2">February</option>  
-                <option value="3">March</option>  
-                <option value="4">April</option>  
-                <option value="5">May</option>  
-                <option value="6">June</option>  
-                <option value="7">July</option>  
-                <option value="8">August</option>  
-                <option value="9">September</option>  
-                <option value="10">October</option>  
-                <option value="11">November</option>  
-                <option value="12">December</option>  
-            </select>
-        </div>
-        <div class="form-group mb-5">
-            <label for="searchInput">Keyword(s)</label>
-            <input type="text" class="form-control" name="searchInput" id="searchInput" aria-describedby="searchInput">
-            <small id="emailHelp" class="form-text text-muted">Enter a keyword here</small>
-        </div>
-        <button class="btn btn-danger btn-lg btn-block" style="background-color: red;">Search</button>
-    </form>
+<div id="search-window">
+    <div class="container mb-5 pb-3 pt-3 bg-light" id="search-box">
+        <form action="/search/results" method="post">
+            <div class="form-group">
+                <label for="yearSelect">Year</label>
+                <select class="form-control" name="yearSelect" id="yearSelect">
+                    <option value="%">Every Year</option>
+                    <% const currentYear = new Date().getFullYear(); %>
+                    <% for (i = currentYear; i >= 1997; i-- ) { %>
+                        <option value="<%- i %>"><%- i %></option>
+                    <% }; %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="monthSelect">Month</label>
+                <select class="form-control" name="monthSelect" id="monthSelect">
+                    <option value="%">Any Month</option>
+                    <option value="1">January</option>  
+                    <option value="2">February</option>  
+                    <option value="3">March</option>  
+                    <option value="4">April</option>  
+                    <option value="5">May</option>  
+                    <option value="6">June</option>  
+                    <option value="7">July</option>  
+                    <option value="8">August</option>  
+                    <option value="9">September</option>  
+                    <option value="10">October</option>  
+                    <option value="11">November</option>  
+                    <option value="12">December</option>  
+                </select>
+            </div>
+            <div class="form-group mb-5">
+                <label for="searchInput">Keyword(s)</label>
+                <input type="text" class="form-control" name="searchInput" id="searchInput" aria-describedby="searchInput">
+                <small id="emailHelp" class="form-text text-muted">Enter a keyword here</small>
+            </div>
+            <button class="btn btn-danger btn-lg btn-block" style="background-color: red;">Search</button>
+        </form>
+    </div>
 </div>
+
 <%- include('partials/footer') %>
