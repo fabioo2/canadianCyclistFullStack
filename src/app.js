@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const router = require('./router');
 const app = express();
@@ -32,8 +31,8 @@ app.set('port', process.env.PORT || PORT); // set express to use our port
 app.use(express.static('public'));
 app.set('views', 'views');
 app.set('view engine', 'ejs'); //configure view engine
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json()); //parse form data client
+app.use(express.urlencoded({ extended: false })); //Parse URL-encoded bodies
+app.use(express.json()); //Used to parse JSON bodies
 
 app.use('/', router);
 

@@ -1,7 +1,6 @@
 //Daily News GET ALL
 exports.renderHomePage = (req, res) => {
-    let sql =
-        'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid order by creation_date desc limit 30';
+    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid order by creation_date desc limit 30';
     //execute query
     pool.query(sql, (err, result) => {
         if (err) {
@@ -18,7 +17,7 @@ exports.renderHomePage = (req, res) => {
 
 exports.renderArticlePage = (req, res) => {
     let id = req.params.id;
-    let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid and c.id = ${id} order by creation_date desc limit 30`;
+    let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid and c.id = ${pool.escape(id)} order by creation_date desc limit 30`;
 
     pool.query(sql, (err, result) => {
         if (err) {
@@ -47,8 +46,7 @@ exports.renderBeersPage = (req, res) => {
 
 //Women's page GET ALL
 exports.renderWomensPage = (req, res) => {
-    let sql =
-        'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
+    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
@@ -64,8 +62,7 @@ exports.renderWomensPage = (req, res) => {
 
 exports.renderWomensArticlePage = (req, res) => {
     let id = req.params.id;
-    let sql =
-        'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
+    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
@@ -79,8 +76,7 @@ exports.renderWomensArticlePage = (req, res) => {
 
 //Photo's page GET
 exports.renderPhotosPage = (req, res) => {
-    let sql =
-        'select distinct year(date_from) as year_num from cc_event where year(date_from) >= 2005 order by year_num desc';
+    let sql = 'select distinct year(date_from) as year_num from cc_event where year(date_from) >= 2005 order by year_num desc';
 
     //execute query
     pool.query(sql, (err, result) => {
@@ -97,8 +93,8 @@ exports.renderPhotosPage = (req, res) => {
 // Event's page GET for the given year
 exports.renderEventPage = (req, res) => {
     let year_num = req.params.year_num;
-    let sql = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, year(e.date_from) as year_num from cc_event e where year(e.date_from) = ${year_num} group by e.id order by e.date_from desc`;
-    let sql2 = `select s.id, s.cc_event_id, s.event_sub_category, e.event_title from cc_event_subcategory s join cc_event e where s.cc_event_id = e.id and year(e.date_from) = ${year_num}`
+    let sql = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, year(e.date_from) as year_num from cc_event e where year(e.date_from) = ${pool.escape(year_num)} group by e.id order by e.date_from desc`;
+    let sql2 = `select s.id, s.cc_event_id, s.event_sub_category, e.event_title from cc_event_subcategory s join cc_event e where s.cc_event_id = e.id and year(e.date_from) = ${pool.escape(year_num)}`;
     //execute query
     pool.query(sql, (err, result) => {
         if (err) {
@@ -111,7 +107,7 @@ exports.renderEventPage = (req, res) => {
             res.render('event.ejs', {
                 title: 'Canadian Cyclist',
                 posts: result,
-                types: result2
+                types: result2,
             });
         });
     });
@@ -122,8 +118,8 @@ exports.renderGalleryPage = (req, res) => {
     let year_num = req.params.year_num;
     let event_id = req.params.event_id;
     let id = req.params.id;
-    let sql = `select * from cc_photo p join cc_event_subcategory s join cc_event e where p.cc_event_subcategory_id = s.id and p.cc_event_id = e.id and year(e.date_from) = ${year_num} and e.id = ${event_id} and s.id = ${id}`;
-    let sql2 = `select s.id, s.cc_event_id, s.event_sub_category, e.event_title, year(e.date_from) as year_num from cc_event_subcategory s join cc_event e where s.cc_event_id = e.id and year(e.date_from) = ${year_num} and e.id = ${event_id}`;
+    let sql = `select * from cc_photo p join cc_event_subcategory s join cc_event e where p.cc_event_subcategory_id = s.id and p.cc_event_id = e.id and year(e.date_from) = ${pool.escape(year_num)} and e.id = ${pool.escape(event_id)} and s.id = ${pool.escape(id)}`;
+    let sql2 = `select s.id, s.cc_event_id, s.event_sub_category, e.event_title, year(e.date_from) as year_num from cc_event_subcategory s join cc_event e where s.cc_event_id = e.id and year(e.date_from) = ${pool.escape(year_num)} and e.id = ${pool.escape(event_id)}`;
 
     //execute query
     pool.query(sql, (err, result) => {
@@ -137,42 +133,34 @@ exports.renderGalleryPage = (req, res) => {
             res.render('gallery.ejs', {
                 title: 'Canadian Cyclist',
                 posts: result,
-                types: result2
+                types: result2,
             });
         });
     });
 };
 
-//create GET
-//exports.renderCreatePage = (req, res) => {
-//    res.render('create.ejs', { title: 'Canadian Cyclist | Create New Post' });
-//};
+//Search page GET
 
-//create Table
-// exports.createTable = (req, res) => {
-//     let sql =
-//         'CREATE TABLE posts2 (id int AUTO_INCREMENT, author VARCHAR(255), title VARCHAR(255), content text, date DATE, Primary Key (Id))';
-//     db.query(sql, (err, result) => {
-//         if (err) throw err;
-//         console.log(result);
-//         res.send('posts2 Table created');
-//     });
-// };
+exports.renderSearchPage = (req, res) => {
+    res.render('search.ejs', {
+        title: 'Canadian Cyclist | Search',
+    });
+};
 
-// //create POST
-// exports.createPost = (req, res) => {
-//     let message = '';
-//     let author = req.body.author;
-//     let title = req.body.title;
-//     let content = req.body.content;
-//     let date = req.body.date;
+//Search page POST
 
-//     let sql = `INSERT INTO posts (author, title, content, date) VALUES ('${author}', '${title}', '${content}', '${date}')`;
-
-//     db.query(sql, (err, result) => {
-//         if (err) {
-//             return res.status(500).send(err);
-//         }
-//         res.redirect('/');
-//     });
-// };
+exports.renderSearchResultsPage = (req, res) => {
+    let year = req.body.yearSelect;
+    let month = req.body.monthSelect;
+    let search = req.body.searchInput;
+    let sql = '';
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('searchresults.ejs', {
+            title: 'Canadian Cyclist',
+            posts: result,
+        });
+    });
+};

@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+<div class="container mb-5 pb-3 pt-3 bg-light" id="search-box">
+    <form action="/search/results" method="post">
+        <div class="form-group">
+            <label for="yearSelect">Year</label>
+            <select class="form-control" name="yearSelect" id="yearSelect">
+                <option>Every Year</option>
+                <% const currentYear = new Date().getFullYear(); %>
+                <% for (i = currentYear; i >= 1997; i-- ) { %>
+                    <option value="<%- i %>"><%- i %></option>
+                <% }; %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="monthSelect">Month</label>
+            <select class="form-control" name="monthSelect" id="monthSelect">
+                <option>Any Month</option>
+                <option value="January">January</option>  
+                <option value="February">February</option>  
+                <option value="March">March</option>  
+                <option value="April">April</option>  
+                <option value="May">May</option>  
+                <option value="June">June</option>  
+                <option value="July">July</option>  
+                <option value="August">August</option>  
+                <option value="September">September</option>  
+                <option value="October">October</option>  
+                <option value="November">November</option>  
+                <option value="December">December</option>  
+            </select>
+        </div>
+        <div class="form-group mb-5">
+            <label for="searchInput">Keyword(s)</label>
+            <input type="text" class="form-control" name="searchInput" id="searchInput" aria-describedby="searchInput">
+            <small id="emailHelp" class="form-text text-muted">Enter a keyword here</small>
+        </div>
+        <button class="btn btn-danger btn-lg btn-block" style="background-color: red;">Search</button>
+    </form>
+</div>
+<%- include('partials/footer') %>
