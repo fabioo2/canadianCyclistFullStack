@@ -22,4 +22,8 @@ router.get('/beers', controller.renderBeersPage);
 router.get('/search', controller.renderSearchPage);
 router.post('/search/results', controller.renderSearchResultsPage);
 
+//classifieds
+router.get('/classifieds', controller.renderClassifiedsPage);
+router.post('/classifieds/results', controller.renderClassifiedsResultsPage);
+
 module.exports = router;
