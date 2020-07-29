@@ -168,3 +168,33 @@ exports.renderSearchResultsPage = (req, res) => {
         });
     });
 };
+
+//Classifieds GET
+
+exports.renderClassifiedsPage = (req, res) => {
+    res.render('classifieds.ejs', {
+        title: 'Canadian Cyclist | Classifieds Search',
+    });
+};
+
+//Classifieds POST
+
+exports.renderClassifiedsResultsPage = (req, res) => {
+    let category = req.body.category;
+    let status = req.body.status;
+    let search = req.body.searchInput;
+    let searchWildcard = `%${req.body.searchInput}%`;
+    let sql = `select c.id, c.class_title, c.class_content, c.class_name, c.class_email, c.class_phone, c.class_price, c.class_category_id, c.class_status_id, c.class_date, c.cc_status_id FROM cc_classifieds c where c.cc_status_id = 4 AND c.class_category_id LIKE ${pool.escape(category)} AND c.class_status_id LIKE ${pool.escape(status)} AND c.class_content LIKE ${pool.escape(
+        searchWildcard)}
+    order by class_date desc limit 50`;
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('classifiedsresults.ejs', {
+            title: 'Canadian Cyclist',
+            search: search,
+            posts: result,
+        });
+    });
+};
