@@ -152,11 +152,23 @@ exports.renderSearchPage = (req, res) => {
 exports.renderSearchResultsPage = (req, res) => {
     let year = req.body.yearSelect;
     let month = req.body.monthSelect;
-    let search = req.body.searchInput;
-    let searchWildcard = `%${req.body.searchInput}%`;
-    let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid AND MONTH(creation_date) LIKE ${pool.escape(month)} AND YEAR(creation_date) LIKE ${pool.escape(year)} AND news_content LIKE ${pool.escape(
-        searchWildcard
-    )} order by creation_date desc limit 50`;
+    let search = req.body.searchInput.replace(/[,.]/g, '');
+    let searchArray = search.split(' ');
+    let searchWildCard = '';
+
+    searchArray.forEach((search, index) => {
+        if (index == searchArray.length - 1) {
+            searchWildCard += `news_content LIKE '%${search}%'`;
+        } else {
+            searchWildCard += `news_content LIKE '%${search}%' AND `;
+        }
+    });
+
+    console.log(searchWildCard);
+    let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid AND MONTH(creation_date) LIKE ${pool.escape(month)} AND YEAR(creation_date) LIKE ${pool.escape(
+        year
+    )} AND ${searchWildCard} order by creation_date desc limit 50`;
+    console.log(sql);
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
@@ -184,8 +196,9 @@ exports.renderClassifiedsResultsPage = (req, res) => {
     let status = req.body.status;
     let search = req.body.searchInput;
     let searchWildcard = `%${req.body.searchInput}%`;
-    let sql = `select c.id, c.class_title, c.class_content, c.class_name, c.class_email, c.class_phone, c.class_price, c.class_category_id, c.class_status_id, c.class_date, c.cc_status_id FROM cc_classifieds c where c.cc_status_id = 4 AND c.class_category_id LIKE ${pool.escape(category)} AND c.class_status_id LIKE ${pool.escape(status)} AND c.class_content LIKE ${pool.escape(
-        searchWildcard)}
+    let sql = `select c.id, c.class_title, c.class_content, c.class_name, c.class_email, c.class_phone, c.class_price, c.class_category_id, c.class_status_id, c.class_date, c.cc_status_id FROM cc_classifieds c where c.cc_status_id = 4 AND c.class_category_id LIKE ${pool.escape(
+        category
+    )} AND c.class_status_id LIKE ${pool.escape(status)} AND c.class_content LIKE ${pool.escape(searchWildcard)}
     order by class_date desc limit 50`;
     pool.query(sql, (err, result) => {
         if (err) {
