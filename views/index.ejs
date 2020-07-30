@@ -11,22 +11,25 @@
                         <li data-target="#slides" data-slide-to="2"> </li>
                     </ol>
                     <div class="carousel-inner p-0 m-0">
-                        <h3 class="text-center list-group-item list-group-item-action align-items-start post bg-light">Featured Articles</h3>
-                        <% const featuredposts = posts.splice(0, 5) %> 
+                        <h3 class="text-center list-group-item list-group-item-action align-items-start post bg-light">
+                            Featured Articles</h3>
+                        <% const featuredposts = posts.splice(0, 5) %>
                         <% featuredposts.forEach((post, index) => { %>
-                        <div class="carousel-item  <% if (index == 0) { %>  active <% } %>" style="padding: 0;"  > 
-                            <div class="col-lg-12 mb-4 mt-0 p-0" >
+                        <div class="carousel-item  <% if (index == 0) { %>  active <% } %>" style="padding: 0;">
+                            <div class="col-lg-12 mb-4 mt-0 p-0">
                                 <div class="card h-100">
 
-                                    <a href="../dailynews/<%= post.id %>"> <img id="featured-image" <%- post.news_content.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/').match(/src="[^"]*"/) %>></a>
+                                    <a href="../dailynews/<%= post.id %>"> <img id="featured-image"
+                                            <%- post.news_content.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/').match(/src="[^"]*"/) %>></a>
                                     <div class="card-body">
                                         <h5 class="card-title"><%= post.news_title %></h5>
                                         <h6 class="card-text"><%= post.creation_date.toLocaleString() %></h6>
-                                        <blockquote class="blockquote">                                
+                                        <blockquote class="blockquote">
                                             <footer class="blockquote-footer"><cite><%= post.username %></cite></footer>
                                         </blockquote>
                                         <br>
-                                        <a href="../dailynews/<%= post.id %>" class="btn bg-success text-white w-100">Read More</a>
+                                        <a href="../dailynews/<%= post.id %>"
+                                            class="btn bg-success text-white w-100">Read More</a>
                                     </div>
                                 </div>
                             </div>
@@ -36,46 +39,62 @@
                     <a class="carousel-control-prev" href="#slides" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="carousel-control-next" href="#slides" role="button" data-slide="next">
+                    </a>
+                    <a class="carousel-control-next" href="#slides" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
-                      </a>
+                    </a>
                 </div>
             </div>
+            <!-- Ad Banner -->
+            <!-- Currently it only shows cc banner for client_id = 4 -->
+            <% var ad = ads[Math.floor(Math.random() * ads.length)]; %>
+            <a href="<%= ad.link %>">
+                <img class="img-fluid mb-4" src="<%= 'http://www.canadiancyclist.com' + ad.banner_content %>"
+                    alt="<%= ad.campaign_title %>" />
+            </a>
         </div>
+            
         <div class="col-md-6">
             <section id="main p-0">
                 <div class="cont">
                     <div id="list p-0 m-0">
                         <!--Article Lists-->
-                        <h3 class="text-center list-group-item list-group-item-action flex-column align-items-start post bg-light">Daily News</h3>
-                        <div class="list-group m-0 pt-0 article"  >
-                            <% posts.forEach((post, index) => { %>                            
-                            <a href="../dailynews/<%= post.id %>" class="list-group-item list-group-item-action flex-column align-items-start post <% if (index % 2 == 0) { %>  bg-light <% } %>">
+                        <h3
+                            class="text-center list-group-item list-group-item-action flex-column align-items-start post bg-light">
+                            Daily News</h3>
+                        <div class="list-group m-0 pt-0 article">
+                            <% posts.forEach((post, index) => { %>
+                            <a href="../dailynews/<%= post.id %>"
+                                class="list-group-item list-group-item-action flex-column align-items-start post <% if (index % 2 == 0) { %>  bg-light <% } %>">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="article-title mb-1"><%= post.news_title %> </h6>
-                                    <small class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
+                                    <small
+                                        class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
                                 </div>
                                 <small class="text-muted"><%= post.username %></small>
                             </a>
-                            <% }) %>  
-                        </div>                      
+                            <% }) %>
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
-    </div>   
+    </div>
 </div>
 
 
 <!--Jumbotron-->
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">Daily News</h1>
-      <p class="lead">News from around Canada, and around the world. Check back here every day for the latest news about racing, events, people and places. Be sure to try out the Archives at the bottom of this page - now a searchable index. We are always looking for cycling news in your community, so drop us a line <a href="mailto:news@canadiancyclist.com">(news@canadiancyclist.com)</a>  - we'll be sure to credit you if we use it!</p>
+        <h1 class="display-4">Daily News</h1>
+        <p class="lead">News from around Canada, and around the world. Check back here every day for the latest news
+            about racing, events, people and places. Be sure to try out the Archives at the bottom of this page - now a
+            searchable index. We are always looking for cycling news in your community, so drop us a line <a
+                href="mailto:news@canadiancyclist.com">(news@canadiancyclist.com)</a> - we'll be sure to credit you if
+            we use it!</p>
     </div>
-</div>    
+</div>
 <!--Recent Articles-->
 
 <%- include('partials/footer') %>
