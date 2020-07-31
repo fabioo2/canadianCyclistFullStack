@@ -1,31 +1,44 @@
 //Daily News GET ALL
 exports.renderHomePage = (req, res) => {
     let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid order by creation_date desc limit 30';
+    let sql2 = 'select * from cc_banner where client_id = 4 and banner_position_id = 12';
     //execute query
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('index.ejs', {
-            title: 'Canadian Cyclist',
-            posts: result,
+        pool.query(sql2, (err2, result2) => {
+            if (err2) {
+                res.redirect('/');
+            }
+            res.render('index.ejs', {
+                title: 'Canadian Cyclist',
+                posts: result,
+                ads: result2,
+            });
         });
     });
 };
 
 //Daily News GET ONE
-
 exports.renderArticlePage = (req, res) => {
     let id = req.params.id;
     let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid and c.id = ${pool.escape(id)} order by creation_date desc limit 30`;
+    let sql2 = 'select * from cc_banner where client_id = 4 and banner_position_id = 12';
 
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('post.ejs', {
-            title: 'Canadian Cyclist',
-            posts: result,
+        pool.query(sql2, (err2, result2) => {
+            if (err2) {
+                res.redirect('/');
+            }
+            res.render('post.ejs', {
+                title: 'Canadian Cyclist',
+                posts: result,
+                ads: result2,
+            });
         });
     });
 };
@@ -113,7 +126,7 @@ exports.renderEventPage = (req, res) => {
     });
 };
 
-//Gallery page GET
+// Gallery's page GET for the given event
 exports.renderGalleryPage = (req, res) => {
     let year_num = req.params.year_num;
     let event_id = req.params.event_id;

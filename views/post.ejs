@@ -16,16 +16,17 @@
             <hr />
 
             <!-- Date/Time -->
-            <p>Posted on <%- posts[0].creation_date.toLocaleString()%>></p>
+            <p>Posted on <%- posts[0].creation_date.toLocaleString() %></p>
 
             <hr />
 
-            <!-- Preview Image -->
-            <img
-                class="img-fluid rounded"
-                src="http://placehold.it/900x300"
-                alt=""
-            />
+            <!-- Ad Banner -->
+            <!-- Currently it only shows cc banner for client_id = 4 -->
+            <% var ad = ads[Math.floor(Math.random() * ads.length)]; %>
+            <a href="<%= ad.link %>">
+                <img class="img-fluid" src="<%= 'http://www.canadiancyclist.com' + ad.banner_content %>"
+                    alt="<%= ad.campaign_title %>" />
+            </a>
 
             <hr />
 
@@ -44,11 +45,7 @@
                 <h5 class="card-header">Search</h5>
                 <div class="card-body">
                     <div class="input-group">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Search for..."
-                        />
+                        <input type="text" class="form-control" placeholder="Search for..." />
                         <span class="input-group-append">
                             <button class="btn btn-secondary" type="button">
                                 Go!
@@ -57,7 +54,7 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- /.row -->
     </div>
-    <!-- /.row -->
-</div>
-<%- include('partials/footer') %>
+    <%- include('partials/footer') %>
