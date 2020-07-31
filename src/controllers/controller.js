@@ -168,7 +168,6 @@ exports.renderSearchResultsPage = (req, res) => {
     let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid AND MONTH(creation_date) LIKE ${pool.escape(month)} AND YEAR(creation_date) LIKE ${pool.escape(
         year
     )} AND ${searchWildCard} order by creation_date desc limit 50`;
-    console.log(sql);
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
