@@ -1,27 +1,37 @@
 <%- include('partials/headerwomens') %>
- 
+
 <!--Recent Articles-->
 <section id="main">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12">
+                <!-- Ad Banner -->
+                <!-- Currently it only shows cc banner for client_id = 4 -->
+                <% var ad = ads[Math.floor(Math.random() * ads.length)]; %>
+                <a href="<%= ad.link %>">
+                    <img class="img-fluid mb-2" src="<%= 'http://www.canadiancyclist.com' + ad.banner_content %>"
+                        alt="<%= ad.campaign_title %>" />
+                </a>
+
                 <div class="list-group m-1">
                     <a href="#" class="align-items-start panel-title">
                         <h2>Latest Women's News</h2>
                     </a>
-                    <% posts.forEach((post, womenscycling) => { %>                            
-                    <a href="../womenscycling/<%= post.id %>" class="list-group-item list-group-item-action flex-column align-items-start post">
+                    <% posts.forEach((post, womenscycling) => { %>
+                    <a href="../womenscycling/<%= post.id %>"
+                        class="list-group-item list-group-item-action flex-column align-items-start post">
                         <div class="d-flex w-100 justify-content-between">
                             <h6 class="article-title mb-1"><%= post.news_title %> </h6>
-                            <small class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
+                            <small
+                                class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
                         </div>
                         <small class="text-muted"><%= post.username %></small>
                     </a>
-                    <% }) %>  
+                    <% }) %>
                 </div>
-                </div>      
             </div>
         </div>
+    </div>
     </div>
 </section>
 
