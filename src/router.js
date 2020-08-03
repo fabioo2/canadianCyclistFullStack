@@ -6,9 +6,21 @@ const controller = require('./controllers/controller');
 router.get('/', controller.renderHomePage);
 router.get('/dailynews/:id', controller.renderArticlePage);
 
-//women's cycling
+//women's Cycling News
 router.get('/Womenscycling', controller.renderWomensPage);
 router.get('/Womenscycling/:id', controller.renderWomensArticlePage);
+
+//women's Features
+router.get('/Womensfeatures', controller.renderWomensFeaturePage);
+router.get('/Womensfeatures/:id', controller.renderWomensFeatureArticle);
+
+//women's Reviews
+router.get('/Womensreviews', controller.renderWomensReviewsPage);
+router.get('/Womensreviews/:id', controller.renderWomensReviewsArticle);
+
+//women's Resources
+router.get('/Womensresources', controller.renderWomensResourcesPage);
+router.get('/Womensresources/:id', controller.renderWomensResourcesArticle);
 
 //photos
 router.get('/photos', controller.renderPhotosPage);

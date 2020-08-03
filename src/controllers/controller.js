@@ -57,7 +57,7 @@ exports.renderBeersPage = (req, res) => {
     });
 };
 
-//Women's page GET ALL
+//Women's News page GET ALL
 exports.renderWomensPage = (req, res) => {
     let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
     pool.query(sql, (err, result) => {
@@ -71,17 +71,107 @@ exports.renderWomensPage = (req, res) => {
     });
 };
 
-//Womens Article GET ONE
+//Womens News Article GET ONE
 
 exports.renderWomensArticlePage = (req, res) => {
     let id = req.params.id;
-    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
+    let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 AND c.id = ${pool.escape(id)} order by creation_date desc limit 30`;
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
         res.render('womenspost.ejs', {
             title: "Canadian Cyclist | Women's Cyclists",
+            posts: result,
+        });
+    });
+};
+
+//Women's Feature page GET ALL
+exports.renderWomensFeaturePage = (req, res) => {
+    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 17 order by creation_date desc limit 30';
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('womensfeatures.ejs', {
+            title: "Canadian Cyclist | Women's Cyclists Featured",
+            posts: result,
+        });
+    });
+};
+
+//Womens Featured Article GET ONE
+
+exports.renderWomensFeatureArticle = (req, res) => {
+    let id = req.params.id;
+    let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 17 AND c.id = ${pool.escape(id)} order by creation_date desc limit 30`;
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('womenspost.ejs', {
+            title: "Canadian Cyclist | Women's Cyclists Featured",
+            posts: result,
+        });
+    });
+};
+
+//Women's Reviews page GET ALL
+exports.renderWomensReviewsPage = (req, res) => {
+    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 27 order by creation_date desc limit 30';
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('womensreviews.ejs', {
+            title: "Canadian Cyclist | Women's Cyclists Reviews",
+            posts: result,
+        });
+    });
+};
+
+//Womens Review Article GET ONE
+
+exports.renderWomensReviewsArticle = (req, res) => {
+    let id = req.params.id;
+    let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 27 AND c.id = ${pool.escape(id)} order by creation_date desc limit 30`;
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('womensposts.ejs', {
+            title: "Canadian Cyclist | Women's Cyclists Reviews",
+            posts: result,
+        });
+    });
+};
+
+//Women's Resources page GET ALL
+exports.renderWomensResourcesPage = (req, res) => {
+    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 16 order by creation_date desc limit 30';
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('womensresources.ejs', {
+            title: "Canadian Cyclist | Women's Cyclists Resources",
+            posts: result,
+        });
+    });
+};
+
+//Womens Resources Article GET ONE
+
+exports.renderWomensResourcesArticle = (req, res) => {
+    let id = req.params.id;
+    let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 16 AND c.id = ${pool.escape(id)} order by creation_date desc limit 30`;
+    pool.query(sql, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('womenspost.ejs', {
+            title: "Canadian Cyclist | Women's Cyclists Resources",
             posts: result,
         });
     });

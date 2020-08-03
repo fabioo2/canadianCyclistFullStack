@@ -44,6 +44,15 @@
     color: white;
 }
 
+.logo-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-cc {
+    margin-top: -0.5em;
+}
+
 /* footer */
 .footer {
     background-color:#8054B4 ;
