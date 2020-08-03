@@ -7,12 +7,12 @@
             <div class="col-md-12 col-sm-12">
                 <div class="list-group m-1">
                     <a href="#" class="align-items-start panel-title">
-                        <h2>Latest Women's News</h2>
+                        <h2>Latest Women's Resources</h2>
                     </a>
                     <% posts.forEach((post, womenscycling) => { %>                            
                     <a href="../womenscycling/<%= post.id %>" class="list-group-item list-group-item-action flex-column align-items-start post">
                         <div class="d-flex w-100 justify-content-between">
-                            <h6 class="article-title mb-1"><%= post.news_title %> </h6>
+                            <h6 class="article-title mb-1"> <%= post.news_title %> </h6>
                             <small class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
                         </div>
                         <small class="text-muted"><%= post.username %></small>
