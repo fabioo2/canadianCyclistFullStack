@@ -20,16 +20,13 @@
         <!-- get all distinct event title, date_from, date_to, and event_location for the selected year -->
         <% for (var i = 0; i < posts.length; i++) { %>
         <h5><%= posts[i].event_title %></h5>
-            <% if (posts[i].date_to != "0000-00-00") { %>
-                <p><%= posts[i].date_from.toLocaleDateString('en-US') %> - <%= posts[i].date_to.toLocaleDateString('en-US') %> <%= posts[i].event_location %></p>
-            <% } else { %>
-                <p><%= posts[i].date_from.toLocaleDateString('en-US') %> <%= posts[i].event_location %></p>
-            <% } %>
+        <p><%= posts[i].date_from.toLocaleDateString('en-US') %> - <%= posts[i].date_to.toLocaleDateString('en-US') %>
+            <%= posts[i].event_location %></p>
         <!-- get all sub_category of the selected event -->
         <!-- pass year, event_id, and sub_category_id on url -->
         <% for (var j = 0; j < types.length; j++) { %>
         <% if (types[j].cc_event_id == posts[i].id) { %>
-        <a href="../photos/<%= posts[i].year_num %>/<%= types[j].cc_event_id %>/<%= types[j].id %>">
+        <a href="/photos/<%= posts[i].year_num %>/<%= types[j].cc_event_id %>/<%= types[j].id %>">
             <p><%= types[j].event_sub_category %></p>
         </a>
         <% } %>
