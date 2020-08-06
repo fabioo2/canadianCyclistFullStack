@@ -13,6 +13,7 @@
 </div>
 
 <!-- gallery -->
+<a name="top"></a>
 <div class="container">
     <div class="text-center">
         <!-- display the year on the url for the heading -->
@@ -20,16 +21,16 @@
         <!-- get all distinct event title, date_from, date_to, and event_location for the selected year -->
         <!-- older photos sotred in subcategory table not photo table -->
         <% for (var i = 0; i < events.length; i++) { %>
-            <!-- check if photo_link is null usually events after 2009 -->
-            <!-- if it is null, check if it is exsited in photo table to get photos -->
+        <!-- check if photo_link is null usually events after 2009 -->
+        <!-- if it is null, check if it is exsited in photo table to get photos -->
             <% if (events[i].photo_link == null) { %>
                 <% for (var j = 0; j < photoEvents.length; j++) { %>
                     <% if (events[i].id == photoEvents[j].id) { %>
-                        <h5><%= events[i].event_title %></h5>
-                        <p><%= events[i].date_from.toLocaleDateString('en-US') %> - <%= events[i].date_to.toLocaleDateString('en-US') %>
+                    <h5><%= events[i].event_title %></h5>
+                    <p><%= events[i].date_from.toLocaleDateString('en-US') %> - <%= events[i].date_to.toLocaleDateString('en-US') %>
                         <%= events[i].event_location %></p>
-                        <!-- get all sub_category of the selected event -->
-                        <!-- pass year, event_id, and sub_category_id on url -->
+                    <!-- get all sub_category of the selected event -->
+                    <!-- pass year, event_id, and sub_category_id on url -->
                         <% for (var x = 0; x < subs.length; x++) { %>
                             <% if (events[i].id == subs[x].cc_event_id) { %>
                             <a href="/photos/<%= events[i].year_num %>/<%= subs[x].cc_event_id %>/<%= subs[x].id %>">
@@ -40,15 +41,16 @@
                     <% } %>
                 <% } %>
             <% } %>
-            <!-- check if photo_link is in subcategory tables usually events before 2009 -->
+        <!-- check if photo_link is in subcategory tables usually events before 2009 -->
             <% if (events[i].photo_link != null) { %>
-                <h5><%= events[i].event_title %></h5>
-                <!-- check if date_to is not null -->
-                <!-- if it is null, exclude date_to -->
+            <h5><%= events[i].event_title %></h5>
+            <!-- check if date_to is not null -->
+            <!-- if it is null, exclude date_to -->
                 <% if (events[i].date_to != "0000-00-00") { %>
-                    <p><%= events[i].date_from.toLocaleDateString('en-US') %> - <%= events[i].date_to.toLocaleDateString('en-US') %> <%= events[i].event_location %></p>
+                <p><%= events[i].date_from.toLocaleDateString('en-US') %> - <%= events[i].date_to.toLocaleDateString('en-US') %>
+                    <%= events[i].event_location %></p>
                 <% } else { %>
-                    <p><%= events[i].date_from.toLocaleDateString('en-US') %> <%= events[i].event_location %></p>
+                <p><%= events[i].date_from.toLocaleDateString('en-US') %> <%= events[i].event_location %></p>
                 <% } %>
                 <!-- get all sub_category of the selected event -->
                 <!-- pass year, event_id, and sub_category_id on url -->
