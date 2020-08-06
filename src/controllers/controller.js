@@ -245,21 +245,28 @@ exports.renderPhotosPage = (req, res) => {
 // Event's page GET for the given year
 exports.renderEventPage = (req, res) => {
     let year_num = req.params.year_num;
-    let sql = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, year(e.date_from) as year_num from cc_event e where year(e.date_from) = ${pool.escape(year_num)} group by e.id order by e.date_from desc`;
-    let sql2 = `select s.id, s.cc_event_id, s.event_sub_category, e.event_title from cc_event_subcategory s join cc_event e where s.cc_event_id = e.id and year(e.date_from) = ${pool.escape(year_num)}`;
+    let allEvents = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, year(e.date_from) as year_num, s.photo_link from cc_event e join cc_event_subcategory s where e.id = s.cc_event_id and year(e.date_from) = ${pool.escape(year_num)} group by e.id order by e.date_from desc`
+    let newerEvents = `select e.id from cc_event e join cc_photo p where e.id = p.cc_event_id and year(e.date_from) = ${pool.escape(year_num)} group by e.id order by e.date_from desc`;
+    let subcategories = `select s.id, s.cc_event_id, s.event_sub_category from cc_event e join cc_event_subcategory s where e.id = s.cc_event_id and year(e.date_from) = ${pool.escape(year_num)}`;
     //execute query
-    pool.query(sql, (err, result) => {
+    pool.query(allEvents, (err, result) => {
         if (err) {
             res.redirect('/');
         }
-        pool.query(sql2, (err2, result2) => {
+        pool.query(newerEvents, (err2, result2) => {
             if (err2) {
                 res.redirect('/');
             }
-            res.render('event.ejs', {
-                title: 'Canadian Cyclist',
-                posts: result,
-                types: result2,
+            pool.query(subcategories, (err3, result3) => {
+                if (err3) {
+                    res.redirect('/');
+                }
+                res.render('event.ejs', {
+                    title: 'Canadian Cyclist',
+                    events: result,
+                    photoEvents: result2,
+                    subs: result3,
+                });
             });
         });
     });
