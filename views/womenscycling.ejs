@@ -1,5 +1,5 @@
 <%- include('partials/headerwomens') %>
- 
+
 <!--Recent Articles-->
 <section id="main">
     <div class="container">
@@ -9,19 +9,21 @@
                     <a href="#" class="align-items-start panel-title">
                         <h2>Latest Women's News</h2>
                     </a>
-                    <% posts.forEach((post, womenscycling) => { %>                            
-                    <a href="../womenscycling/<%= post.id %>" class="list-group-item list-group-item-action flex-column align-items-start post">
+                    <% posts.forEach((post, womenscycling) => { %>
+                    <a href="../womenscycling/<%= post.id %>"
+                        class="list-group-item list-group-item-action flex-column align-items-start post">
                         <div class="d-flex w-100 justify-content-between">
                             <h6 class="article-title mb-1"><%= post.news_title %> </h6>
-                            <small class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
+                            <small
+                                class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
                         </div>
                         <small class="text-muted"><%= post.username %></small>
                     </a>
-                    <% }) %>  
+                    <% }) %>
                 </div>
-                </div>      
             </div>
         </div>
+    </div>
     </div>
 </section>
 

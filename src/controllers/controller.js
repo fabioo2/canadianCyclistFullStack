@@ -1,13 +1,16 @@
+// Query for advertisements
+let AdBannerQuery = 'select * from cc_banner where client_id = 4 and banner_position_id = 12';
+let WomensAdBannerQuery = 'select * from cc_banner where client_id = 4 and banner_position_id = 19';
+
 //Daily News GET ALL
 exports.renderHomePage = (req, res) => {
     let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid order by creation_date desc limit 30';
-    let sql2 = 'select * from cc_banner where client_id = 4 and banner_position_id = 12';
     //execute query
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
-        pool.query(sql2, (err2, result2) => {
+        pool.query(AdBannerQuery, (err2, result2) => {
             if (err2) {
                 res.redirect('/');
             }
@@ -24,13 +27,12 @@ exports.renderHomePage = (req, res) => {
 exports.renderArticlePage = (req, res) => {
     let id = req.params.id;
     let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u where c.author_id = u.uid and c.id = ${pool.escape(id)} order by creation_date desc limit 30`;
-    let sql2 = 'select * from cc_banner where client_id = 4 and banner_position_id = 12';
 
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
-        pool.query(sql2, (err2, result2) => {
+        pool.query(AdBannerQuery, (err2, result2) => {
             if (err2) {
                 res.redirect('/');
             }
@@ -57,16 +59,23 @@ exports.renderBeersPage = (req, res) => {
     });
 };
 
-//Women's News page GET ALL
+//Women's page GET ALL
 exports.renderWomensPage = (req, res) => {
     let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 order by creation_date desc limit 30';
+
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('womenscycling.ejs', {
-            title: "Canadian Cyclist | Women's Cyclists",
-            posts: result,
+        pool.query(WomensAdBannerQuery, (err2, result2) => {
+            if (err2) {
+                res.redirect('/');
+            }
+            res.render('womenscycling.ejs', {
+                title: "Canadian Cyclist | Women's Cyclists",
+                posts: result,
+                ads: result2,
+            });
         });
     });
 };
@@ -76,13 +85,20 @@ exports.renderWomensPage = (req, res) => {
 exports.renderWomensArticlePage = (req, res) => {
     let id = req.params.id;
     let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 3 AND c.id = ${pool.escape(id)} order by creation_date desc limit 30`;
+
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('womenspost.ejs', {
-            title: "Canadian Cyclist | Women's Cyclists",
-            posts: result,
+        pool.query(WomensAdBannerQuery, (err2, result2) => {
+            if (err2) {
+                res.redirect('/');
+            }
+            res.render('womenspost.ejs', {
+                title: "Canadian Cyclist | Women's Cyclists",
+                posts: result,
+                ads: result2,
+            });
         });
     });
 };
@@ -94,15 +110,20 @@ exports.renderWomensFeaturePage = (req, res) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('womensfeatures.ejs', {
-            title: "Canadian Cyclist | Women's Cyclists Featured",
-            posts: result,
+        pool.query(WomensAdBannerQuery, (err2, result2) => {
+            if (err2) {
+                res.redirect('/');
+            }
+            res.render('womensfeatures.ejs', {
+                title: "Canadian Cyclist | Women's Cyclists Featured",
+                posts: result,
+                ads: result2,
+            });
         });
     });
 };
 
 //Womens Featured Article GET ONE
-
 exports.renderWomensFeatureArticle = (req, res) => {
     let id = req.params.id;
     let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 17 AND c.id = ${pool.escape(id)} order by creation_date desc limit 30`;
@@ -110,9 +131,15 @@ exports.renderWomensFeatureArticle = (req, res) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('womenspost.ejs', {
-            title: "Canadian Cyclist | Women's Cyclists Featured",
-            posts: result,
+        pool.query(WomensAdBannerQuery, (err2, result2) => {
+            if (err2) {
+                res.redirect('/');
+            }
+            res.render('womenspost.ejs', {
+                title: "Canadian Cyclist | Women's Cyclists Featured",
+                posts: result,
+                ads: result2,
+            });
         });
     });
 };
@@ -124,15 +151,20 @@ exports.renderWomensReviewsPage = (req, res) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('womensreviews.ejs', {
-            title: "Canadian Cyclist | Women's Cyclists Reviews",
-            posts: result,
+        pool.query(WomensAdBannerQuery, (err2, result2) => {
+            if (err2) {
+                res.redirect('/');
+            }
+            res.render('womensreviews.ejs', {
+                title: "Canadian Cyclist | Women's Cyclists Reviews",
+                posts: result,
+                ads: result2,
+            });
         });
     });
 };
 
 //Womens Review Article GET ONE
-
 exports.renderWomensReviewsArticle = (req, res) => {
     let id = req.params.id;
     let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 27 AND c.id = ${pool.escape(id)} order by creation_date desc limit 30`;
@@ -140,9 +172,15 @@ exports.renderWomensReviewsArticle = (req, res) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('womensposts.ejs', {
-            title: "Canadian Cyclist | Women's Cyclists Reviews",
-            posts: result,
+        pool.query(WomensAdBannerQuery, (err2, result2) => {
+            if (err2) {
+                res.redirect('/');
+            }
+            res.render('womensposts.ejs', {
+                title: "Canadian Cyclist | Women's Cyclists Reviews",
+                posts: result,
+                ads: result2,
+            });
         });
     });
 };
@@ -154,15 +192,20 @@ exports.renderWomensResourcesPage = (req, res) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('womensresources.ejs', {
-            title: "Canadian Cyclist | Women's Cyclists Resources",
-            posts: result,
+        pool.query(WomensAdBannerQuery, (err2, result2) => {
+            if (err2) {
+                res.redirect('/');
+            }
+            res.render('womensresources.ejs', {
+                title: "Canadian Cyclist | Women's Cyclists Resources",
+                posts: result,
+                ads: result2,
+            });
         });
     });
 };
 
 //Womens Resources Article GET ONE
-
 exports.renderWomensResourcesArticle = (req, res) => {
     let id = req.params.id;
     let sql = `select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 16 AND c.id = ${pool.escape(id)} order by creation_date desc limit 30`;
@@ -170,9 +213,15 @@ exports.renderWomensResourcesArticle = (req, res) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('womenspost.ejs', {
-            title: "Canadian Cyclist | Women's Cyclists Resources",
-            posts: result,
+        pool.query(WomensAdBannerQuery, (err2, result2) => {
+            if (err2) {
+                res.redirect('/');
+            }
+            res.render('womenspost.ejs', {
+                title: "Canadian Cyclist | Women's Cyclists Resources",
+                posts: result,
+                ads: result2,
+            });
         });
     });
 };
@@ -196,21 +245,28 @@ exports.renderPhotosPage = (req, res) => {
 // Event's page GET for the given year
 exports.renderEventPage = (req, res) => {
     let year_num = req.params.year_num;
-    let sql = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, year(e.date_from) as year_num from cc_event e where year(e.date_from) = ${pool.escape(year_num)} group by e.id order by e.date_from desc`;
-    let sql2 = `select s.id, s.cc_event_id, s.event_sub_category, e.event_title from cc_event_subcategory s join cc_event e where s.cc_event_id = e.id and year(e.date_from) = ${pool.escape(year_num)}`;
+    let allEvents = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, year(e.date_from) as year_num, s.photo_link from cc_event e join cc_event_subcategory s where e.id = s.cc_event_id and year(e.date_from) = ${pool.escape(year_num)} group by e.id order by e.date_from desc`
+    let newerEvents = `select e.id from cc_event e join cc_photo p where e.id = p.cc_event_id and year(e.date_from) = ${pool.escape(year_num)} group by e.id order by e.date_from desc`;
+    let subcategories = `select s.id, s.cc_event_id, s.event_sub_category, s.photo_link from cc_event e join cc_event_subcategory s where e.id = s.cc_event_id and year(e.date_from) = ${pool.escape(year_num)}`;
     //execute query
-    pool.query(sql, (err, result) => {
+    pool.query(allEvents, (err, result) => {
         if (err) {
             res.redirect('/');
         }
-        pool.query(sql2, (err2, result2) => {
+        pool.query(newerEvents, (err2, result2) => {
             if (err2) {
                 res.redirect('/');
             }
-            res.render('event.ejs', {
-                title: 'Canadian Cyclist',
-                posts: result,
-                types: result2,
+            pool.query(subcategories, (err3, result3) => {
+                if (err3) {
+                    res.redirect('/');
+                }
+                res.render('event.ejs', {
+                    title: 'Canadian Cyclist',
+                    events: result,
+                    photoEvents: result2,
+                    subs: result3,
+                });
             });
         });
     });
@@ -221,22 +277,29 @@ exports.renderGalleryPage = (req, res) => {
     let year_num = req.params.year_num;
     let event_id = req.params.event_id;
     let id = req.params.id;
-    let sql = `select * from cc_photo p join cc_event_subcategory s join cc_event e where p.cc_event_subcategory_id = s.id and p.cc_event_id = e.id and year(e.date_from) = ${pool.escape(year_num)} and e.id = ${pool.escape(event_id)} and s.id = ${pool.escape(id)}`;
+    let getSelectedEvent = `select * from cc_event e join cc_event_subcategory s where e.id = s.cc_event_id and year(e.date_from) = ${pool.escape(year_num)} and e.id = ${pool.escape(event_id)} and s.id = ${pool.escape(id)}`;
+    let getPhotos = `select * from cc_photo p join cc_event e where p.cc_event_id = e.id and year(e.date_from) = ${pool.escape(year_num)} and e.id = ${pool.escape(event_id)} and p.cc_event_subcategory_id = ${pool.escape(id)}`;
     let sql2 = `select s.id, s.cc_event_id, s.event_sub_category, e.event_title, year(e.date_from) as year_num from cc_event_subcategory s join cc_event e where s.cc_event_id = e.id and year(e.date_from) = ${pool.escape(year_num)} and e.id = ${pool.escape(event_id)}`;
 
     //execute query
-    pool.query(sql, (err, result) => {
+    pool.query(getSelectedEvent, (err, result) => {
         if (err) {
             res.redirect('/');
         }
-        pool.query(sql2, (err2, result2) => {
-            if (err2) {
+        pool.query(getPhotos, (err, result2) => {
+            if (err) {
                 res.redirect('/');
             }
-            res.render('gallery.ejs', {
-                title: 'Canadian Cyclist',
-                posts: result,
-                types: result2,
+            pool.query(sql2, (err2, result3) => {
+                if (err2) {
+                    res.redirect('/');
+                }
+                res.render('gallery.ejs', {
+                    title: 'Canadian Cyclist',
+                    posts: result,
+                    photos: result2,
+                    types: result3,
+                });
             });
         });
     });
