@@ -54,7 +54,9 @@
                 <!-- pass year, event_id, and sub_category_id on url -->
                 <% for (var x = 0; x < subs.length; x++) { %>
                     <% if (events[i].id == subs[x].cc_event_id) { %>
-                    <a href="/photos/<%= events[i].year_num %>/<%= subs[x].cc_event_id %>/<%= subs[x].id %>">
+                    <% let address = 'http://www.canadiancyclist.com' %>
+                    <% let photo_url = subs[x].photo_link %>
+                    <a href="<%= address.concat(photo_url) %>">
                         <p><%= subs[x].event_sub_category %></p>
                     </a>
                     <% } %>
