@@ -71,7 +71,7 @@ exports.renderWomensPage = (req, res) => {
             if (err2) {
                 res.redirect('/');
             }
-            res.render('womenscycling.ejs', {
+            res.render('womens/womensCycling.ejs', {
                 title: "Canadian Cyclist | Women's Cyclists",
                 posts: result,
                 ads: result2,
@@ -94,7 +94,7 @@ exports.renderWomensArticlePage = (req, res) => {
             if (err2) {
                 res.redirect('/');
             }
-            res.render('womenspost.ejs', {
+            res.render('womens/womensPost.ejs', {
                 title: "Canadian Cyclist | Women's Cyclists",
                 posts: result,
                 ads: result2,
@@ -114,7 +114,7 @@ exports.renderWomensFeaturePage = (req, res) => {
             if (err2) {
                 res.redirect('/');
             }
-            res.render('womensfeatures.ejs', {
+            res.render('womens/womensFeatures.ejs', {
                 title: "Canadian Cyclist | Women's Cyclists Featured",
                 posts: result,
                 ads: result2,
@@ -135,7 +135,7 @@ exports.renderWomensFeatureArticle = (req, res) => {
             if (err2) {
                 res.redirect('/');
             }
-            res.render('womenspost.ejs', {
+            res.render('womens/womensPost.ejs', {
                 title: "Canadian Cyclist | Women's Cyclists Featured",
                 posts: result,
                 ads: result2,
@@ -155,7 +155,7 @@ exports.renderWomensReviewsPage = (req, res) => {
             if (err2) {
                 res.redirect('/');
             }
-            res.render('womensreviews.ejs', {
+            res.render('womens/womensReviews.ejs', {
                 title: "Canadian Cyclist | Women's Cyclists Reviews",
                 posts: result,
                 ads: result2,
@@ -176,7 +176,7 @@ exports.renderWomensReviewsArticle = (req, res) => {
             if (err2) {
                 res.redirect('/');
             }
-            res.render('womensposts.ejs', {
+            res.render('womens/womensPost.ejs', {
                 title: "Canadian Cyclist | Women's Cyclists Reviews",
                 posts: result,
                 ads: result2,
@@ -196,7 +196,7 @@ exports.renderWomensResourcesPage = (req, res) => {
             if (err2) {
                 res.redirect('/');
             }
-            res.render('womensresources.ejs', {
+            res.render('womens/womensResources.ejs', {
                 title: "Canadian Cyclist | Women's Cyclists Resources",
                 posts: result,
                 ads: result2,
@@ -217,7 +217,7 @@ exports.renderWomensResourcesArticle = (req, res) => {
             if (err2) {
                 res.redirect('/');
             }
-            res.render('womenspost.ejs', {
+            res.render('womens/womensPost.ejs', {
                 title: "Canadian Cyclist | Women's Cyclists Resources",
                 posts: result,
                 ads: result2,
