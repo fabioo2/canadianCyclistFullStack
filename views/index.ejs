@@ -18,9 +18,17 @@
                         <div class="carousel-item  <% if (index == 0) { %>  active <% } %>" style="padding: 0;">
                             <div class="col-lg-12 mb-4 mt-0 p-0">
                                 <div class="card h-100">
-
-                                    <a href="../dailynews/<%= post.id %>"> <img id="featured-image"
-                                            <%- post.news_content.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/').match(/src="[^"]*"/) %>></a>
+                                    
+                                    <a  href="../dailynews/<%= post.id %>"> <div style="text-align: center;"><img  id="featured-image" 
+                                        <% if (post.news_content.match(/src="[^"]*"/) == null) { %>
+                                            src="http://www.canadiancyclist.com/images/canadian_cyclist_logo.gif"
+                                        <% } else { %>
+                                            <%- post.news_content.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/').match(/src="[^"]*"/) %>
+                                        <% } %> 
+                                        >
+                                    </div>
+                                    </a>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title"><%= post.news_title %></h5>
                                         <h6 class="card-text"><%= post.creation_date.toLocaleString() %></h6>
