@@ -1,4 +1,4 @@
-<%- include('partials/headerwomens') %>
+<%- include('../partials/headerWomens') %>
  
 <!--Recent Articles-->
 <section id="main" class=" p-0 mb-3">
@@ -6,7 +6,7 @@
         <div id="list p-0 m-0">
             <!--Article Lists-->
             <h3 class="text-center list-group-item list-group-item-action flex-column align-items-start post" style="background: #8054B4; color: white;">
-                Latest Women's Resources</h3>
+                Latest Women's Features</h3>
             <div class="list-group m-0 pt-0 article">
                 <% posts.forEach((post, index) => { %>
                 <a href="../dailynews/<%= post.id %>"
@@ -24,4 +24,4 @@
     </div>
 </section>
 
-<%- include('partials/footerwomens') %>
+<%- include('../partials/footerWomens') %>

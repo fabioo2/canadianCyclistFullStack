@@ -235,7 +235,7 @@ exports.renderPhotosPage = (req, res) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('photos.ejs', {
+        res.render('photos/photos.ejs', {
             title: 'Canadian Cyclist',
             posts: result,
         });
@@ -245,7 +245,7 @@ exports.renderPhotosPage = (req, res) => {
 // Event's page GET for the given year
 exports.renderEventPage = (req, res) => {
     let year_num = req.params.year_num;
-    let allEvents = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, year(e.date_from) as year_num, s.photo_link from cc_event e join cc_event_subcategory s where e.id = s.cc_event_id and year(e.date_from) = ${pool.escape(year_num)} group by e.id order by e.date_from desc`
+    let allEvents = `select e.id, e.event_title, e.event_location, e.date_from, e.date_to, year(e.date_from) as year_num, s.photo_link from cc_event e join cc_event_subcategory s where e.id = s.cc_event_id and year(e.date_from) = ${pool.escape(year_num)} group by e.id order by e.date_from desc`;
     let newerEvents = `select e.id from cc_event e join cc_photo p where e.id = p.cc_event_id and year(e.date_from) = ${pool.escape(year_num)} group by e.id order by e.date_from desc`;
     let subcategories = `select s.id, s.cc_event_id, s.event_sub_category, s.photo_link from cc_event e join cc_event_subcategory s where e.id = s.cc_event_id and year(e.date_from) = ${pool.escape(year_num)}`;
     //execute query
@@ -261,7 +261,7 @@ exports.renderEventPage = (req, res) => {
                 if (err3) {
                     res.redirect('/');
                 }
-                res.render('event.ejs', {
+                res.render('photos/event.ejs', {
                     title: 'Canadian Cyclist',
                     events: result,
                     photoEvents: result2,
@@ -294,7 +294,7 @@ exports.renderGalleryPage = (req, res) => {
                 if (err2) {
                     res.redirect('/');
                 }
-                res.render('gallery.ejs', {
+                res.render('photos/gallery.ejs', {
                     title: 'Canadian Cyclist',
                     posts: result,
                     photos: result2,
@@ -308,7 +308,7 @@ exports.renderGalleryPage = (req, res) => {
 //Search page GET
 
 exports.renderSearchPage = (req, res) => {
-    res.render('search.ejs', {
+    res.render('search/search.ejs', {
         title: 'Canadian Cyclist | Search',
     });
 };
@@ -338,7 +338,7 @@ exports.renderSearchResultsPage = (req, res) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('searchresults.ejs', {
+        res.render('search/searchResults.ejs', {
             title: 'Canadian Cyclist',
             search: search,
             posts: result,
@@ -349,7 +349,7 @@ exports.renderSearchResultsPage = (req, res) => {
 //Classifieds GET
 
 exports.renderClassifiedsPage = (req, res) => {
-    res.render('classifieds.ejs', {
+    res.render('classifieds/classifieds.ejs', {
         title: 'Canadian Cyclist | Classifieds Search',
     });
 };
@@ -369,7 +369,7 @@ exports.renderClassifiedsResultsPage = (req, res) => {
         if (err) {
             res.redirect('/');
         }
-        res.render('classifiedsresults.ejs', {
+        res.render('classifieds/classifiedsResults.ejs', {
             title: 'Canadian Cyclist',
             search: search,
             posts: result,
