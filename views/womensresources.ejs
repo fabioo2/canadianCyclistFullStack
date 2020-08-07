@@ -1,25 +1,24 @@
 <%- include('partials/headerwomens') %>
  
 <!--Recent Articles-->
-<section id="main">
+<section id="main" class=" p-0 mb-3">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <div class="list-group m-1">
-                    <a href="#" class="align-items-start panel-title">
-                        <h2>Latest Women's Resources</h2>
-                    </a>
-                    <% posts.forEach((post, womenscycling) => { %>                            
-                    <a href="../womenscycling/<%= post.id %>" class="list-group-item list-group-item-action flex-column align-items-start post">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6 class="article-title mb-1"> <%= post.news_title %> </h6>
-                            <small class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
-                        </div>
-                        <small class="text-muted"><%= post.username %></small>
-                    </a>
-                    <% }) %>  
-                </div>
-                </div>      
+        <div id="list p-0 m-0">
+            <!--Article Lists-->
+            <h3 class="text-center list-group-item list-group-item-action flex-column align-items-start post" style="background: #8054B4; color: white;">
+                Latest Women's Resources</h3>
+            <div class="list-group m-0 pt-0 article">
+                <% posts.forEach((post, index) => { %>
+                <a href="../dailynews/<%= post.id %>"
+                    class="list-group-item list-group-item-action flex-column align-items-start post <% if (index % 2 == 0) { %>  bg-light <% } %>">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="article-title mb-1"><%= post.news_title %> </h6>
+                        <small
+                            class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
+                    </div>
+                    <small class="text-muted"><%= post.username %></small>
+                </a>
+                <% }) %>
             </div>
         </div>
     </div>
