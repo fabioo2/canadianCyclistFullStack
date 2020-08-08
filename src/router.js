@@ -37,5 +37,7 @@ router.post('/search/results', controller.renderSearchResultsPage);
 //classifieds
 router.get('/classifieds', controller.renderClassifiedsPage);
 router.post('/classifieds/results', controller.renderClassifiedsResultsPage);
+router.get('/classifieds/create', controller.renderCreateClassifiedsPage);
+router.post('/classifieds/create', controller.postClassified);
 
 module.exports = router;

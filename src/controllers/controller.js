@@ -376,3 +376,51 @@ exports.renderClassifiedsResultsPage = (req, res) => {
         });
     });
 };
+
+//GET create classifieds page
+
+exports.renderCreateClassifiedsPage = (req, res) => {
+    res.render('classifieds/createClassifieds.ejs', {
+        title: 'Canadian Cyclist | Create Classifieds',
+        message: '',
+    });
+};
+
+//POST classifieds to database
+exports.postClassified = (req, res) => {
+    let name = req.body.name;
+    let phone = req.body.phone;
+    let email = req.body.email;
+    let type = req.body.type;
+    let category = req.body.category;
+    let title = req.body.title;
+    let price = req.body.price;
+    let content = req.body.content;
+    let hideEmail = 0;
+    let hidePhone = 0;
+    let date = new Date();
+    date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+
+    console.log(req.body);
+    if (req.body.hideEmail == 'true') {
+        hideEmail = 1;
+    }
+    if (req.body.hidePhone == 'true') {
+        hidePhone = 1;
+    }
+
+    let sql =
+        `INSERT INTO cc_classifieds (class_title, class_content, class_name, class_email, class_email_hide, class_phone, class_phone_hide, class_price, class_category_id, class_status_id, class_date) ` +
+        `VALUES ( ${pool.escape(title)}, ${pool.escape(content)}, ${pool.escape(name)}, ${pool.escape(email)}, ${pool.escape(hideEmail)}, ${pool.escape(phone)}, ${pool.escape(hidePhone)}, ${pool.escape(price)}, ${pool.escape(category)}, ${pool.escape(type)}, ${date})`;
+
+    pool.query(sql, (err) => {
+        console.log(sql);
+        if (err) {
+            return res.redirect('/');
+        }
+        res.render('classifieds/createClassifieds.ejs', {
+            title: `Canadian Cyclist | Classifieds`,
+            message: 'Classified Ad has been submitted for admin approval',
+        });
+    });
+};
