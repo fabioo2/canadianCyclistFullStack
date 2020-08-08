@@ -33,6 +33,16 @@
    */
 
 /* article lists */
+
+.article-title {
+    width: 900px;
+}
+
+.article-date {
+    width: 200px;
+    text-align:right;
+}
+
 #list {
     width: 100%;
 }
