@@ -51,7 +51,7 @@
 
 /* full article */
 
-#full-article img, #full-article .html5-video-container{
+#full-article img {
     max-width: 100%;
     height: auto;
 }
