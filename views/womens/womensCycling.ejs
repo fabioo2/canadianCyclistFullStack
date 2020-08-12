@@ -6,34 +6,46 @@
     <% var ad = ads[Math.floor(Math.random() * ads.length)]; %>
     <a href="<%= ad.link %>">
         <img class="img-fluid mb-2" src="<%= 'http://www.canadiancyclist.com' + ad.banner_content %>"
-               alt="<%= ad.campaign_title %>" />
-   </a>
+            alt="<%= ad.campaign_title %>" />
+    </a>
 </div>
 
 <!--Recent Articles-->
-    
-    <section id="main" class=" p-0 mb-3">
-        <div class="container">
-            <div id="list p-0 m-0">
-                <!--Article Lists-->
-                <h3 class="text-center list-group-item list-group-item-action flex-column align-items-start post" style="background: #8054B4; color: white;">
-                    Latest Women's News</h3>
-                <div class="list-group m-0 pt-0 article">
-                    <% posts.forEach((post, womenscycling) => { %>
-                    <a href="../womenscycling/<%= post.id %>"
-                        class="list-group-item list-group-item-action flex-column align-items-start post <% if (womenscycling % 2 == 0) { %>  bg-light <% } %>">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6 class="article-title mb-1"><%= post.news_title %> </h6>
-                            <small
-                                class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
-                        </div>
-                        <small class="text-muted"><%= post.username %></small>
-                    </a>
-                    <% }) %>
-                </div>
+
+<section id="main" class=" p-0 mb-3">
+    <div class="container">
+        <div id="list p-0 m-0">
+            <!--Article Lists-->
+            <h3 class="text-center list-group-item list-group-item-action flex-column align-items-start post"
+                style="background: #8054B4; color: white;">
+                Latest Women's News</h3>
+            <div class="list-group m-0 pt-0 article">
+                <% posts.forEach((post, womenscycling) => { %>
+                <a href="../womenscycling/<%= post.id %>"
+                    class="list-group-item list-group-item-action flex-column align-items-start post <% if (womenscycling % 2 == 0) { %>  bg-light <% } %>">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="article-title mb-1"><%= post.news_title %> </h6>
+                        <small
+                            class="article-date"><%= moment(post.creation_date, "YYYYMMDD").startOf('hour').fromNow(); %></small>
+                    </div>
+                    <small class="text-muted"><%= post.username %></small>
+                </a>
+                <% }) %>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
+<!--Jumbotron-->
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Women's News</h1>
+        <p class="lead">Women's news from around Canada, and around the world. Check back here every day for the latest
+            news about women's racing, events, people and places. Be sure to try out the Archives at the bottom of this
+            page - now a searchable index. We are always looking for cycling news in your community, so drop us a line
+            <a href="mailto:leigh@canadiancyclist.com">(leigh@canadiancyclist.com)</a> - we'll be sure to credit you if
+            we use it!</p>
+    </div>
+</div>
 
 <%- include('../partials/footerwomens') %>

@@ -1,9 +1,22 @@
 <%- include('../partials/header') %>
-<div class="container mb-5 pb-3 pt-3 bg-light">
-    <h1>Classifieds</h1>&nbsp;
-    <p>This is the place to let people know what you have for sale, or what you want to buy. Private classifieds are free (no dealers please!), just click <a href="classifieds/create">Here</a> to fill in the Classifieds submission form , and we will do our best to post them within 48 hours.</p> &nbsp;
-    <p>The rules are simple: the posting should be bicycle-related, it should be short (below 30 words if possible), and <a href="mailto:classifieds@canadiancyclist.com">let us know</a> if the item(s) sells, so that we can delete it. Postings will be automatically deleted after 2 months. Canadian Cyclist takes no responsibility to verify the validity of any advertisement posted.</p>
-</div>
+
+    <!--Jumbotron-->
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Classifieds</h1>
+            <p class="lead">This is the place to let people know what you have for sale, or what you want to buy.
+                Private classifieds are free (no dealers please!), just click <a href="classifieds/create">Here</a> to
+                fill in the Classifieds submission form , and we will do our best to post them within 48 hours.<br><br>
+                The rules are simple: the posting should be bicycle-related, it should be short (below 30 words if
+                possible),
+                and <a href="mailto:classifieds@canadiancyclist.com">let us know</a> if the item(s) sells, so that we
+                can
+                delete it. Postings will be automatically deleted after 2 months. Canadian Cyclist takes no
+                responsibility
+                to verify the validity of any advertisement posted.</p>
+        </div>
+    </div>
+
 <div id="search-window">
     <div class="container mb-5 pb-3 pt-3 bg-light">
         <form action="/classifieds/results" method="post">
@@ -11,29 +24,30 @@
                 <label for="category">Category</label>
                 <select class="form-control" name="category" id="category">
                     <option value="">Please Select</option>
-                    <option value="1">Complete Bikes - Road</option>  
-                    <option value="2">Complete Bikes - Mountain</option>  
-                    <option value="3">Complete Bikes - Other</option>  
-                    <option value="4">Bike Frames</option>  
-                    <option value="5">Bike Components - Road</option>  
-                    <option value="6">Bike Components - Mountain</option>  
-                    <option value="7">Bike Components - Other</option>  
-                    <option value="8">Clothing</option>  
-                    <option value="9">Other</option>  
-                    <option value="10">Employment</option>   
+                    <option value="1">Complete Bikes - Road</option>
+                    <option value="2">Complete Bikes - Mountain</option>
+                    <option value="3">Complete Bikes - Other</option>
+                    <option value="4">Bike Frames</option>
+                    <option value="5">Bike Components - Road</option>
+                    <option value="6">Bike Components - Mountain</option>
+                    <option value="7">Bike Components - Other</option>
+                    <option value="8">Clothing</option>
+                    <option value="9">Other</option>
+                    <option value="10">Employment</option>
                 </select>
             </div>
 
             <!--Search Button>-->
             <div class="form-group mb-5">
                 <label for="searchInput">Keyword(s)</label>
-                <input type="text" class="form-control" name="searchInput" id="searchInput" aria-describedby="searchInput">
+                <input type="text" class="form-control" name="searchInput" id="searchInput"
+                    aria-describedby="searchInput">
                 <small id="emailHelp" class="form-text text-muted">Enter a keyword here</small>
             </div>
             <!-- Radio Buttons -->
             <div class="form-group mb-5">
-                <input type="radio" class="radio" name="status" id="status" value="1"/>For Sale             
-                <input type="radio" class="radio" name="status" id="status" value="2"/>Wanted
+                <input type="radio" class="radio" name="status" id="status" value="1" />For Sale
+                <input type="radio" class="radio" name="status" id="status" value="2" />Wanted
             </div>
 
             <button class="btn btn-danger btn-lg btn-block" style="background-color: red;">Search</button> &nbsp;
