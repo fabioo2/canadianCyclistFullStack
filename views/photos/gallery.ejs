@@ -23,7 +23,7 @@
         <% let str2 = str1.replace(/pages/ , 'thumbnails'); %>
         <% let str3 = str2.replace(/(\.)htm/g , '.jpg'); %>
         <a href="<%= photo.photo_location.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/') %>">
-          <img class="img-fluid img-thumbnail" src="<%= str3 %>">
+          <img class="img-fluid img-thumbnail" src="<%= str3 %>" alt="<%= photo.photo_description %>">
         </a>
       </div>
       <% }) %>
@@ -41,9 +41,9 @@
   <% } %>
     <!-- display each of subcategory of the event -->
     <!-- redirect to the link -->
-  <% types.forEach((type) => { %>
-  <a href="/photos/<%= types[0].year_num %>/<%= types[0].cc_event_id %>/<%= type.id %>">
-    <p><%= type.event_sub_category %></p>
+  <% events.forEach((event) => { %>
+  <a href="/photos/<%= events[0].year_num %>/<%= events[0].cc_event_id %>/<%= event.id %>">
+    <p><%= event.event_sub_category %></p>
   </a>
   <% }) %>
 
