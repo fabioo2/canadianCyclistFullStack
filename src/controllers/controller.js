@@ -187,7 +187,7 @@ exports.renderWomensReviewsArticle = (req, res) => {
 
 //Women's Resources page GET ALL
 exports.renderWomensResourcesPage = (req, res) => {
-    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 16 order by creation_date desc limit 30';
+    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 16 AND c.id >= 16918 order by creation_date desc limit 30';
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
