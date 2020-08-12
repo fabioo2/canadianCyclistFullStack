@@ -2,10 +2,10 @@
  
 <!-- Ad Banner -->
 <!-- Currently it only shows cc banner for client_id = 4 -->
-<div class="text-center">
+<div class="text-center mb-2 col-12">
     <% var ad = ads[Math.floor(Math.random() * ads.length)]; %>
     <a href="<%= ad.link %>">
-        <img class="img-fluid mb-2" src="<%= 'http://www.canadiancyclist.com' + ad.banner_content %>"
+        <img class="img-fluid" src="<%= 'http://www.canadiancyclist.com' + ad.banner_content %>"
                alt="<%= ad.campaign_title %>" />
    </a>
 </div>
