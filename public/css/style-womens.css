@@ -63,7 +63,7 @@
     height: auto;
 }
 
-#full-article object {
+#full-article object, #full-article embed {
     max-width: 100% !important;
 }
 
