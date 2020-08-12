@@ -1,6 +1,17 @@
 <%- include('../partials/headerWomens') %>
  
+<!-- Ad Banner -->
+<!-- Currently it only shows cc banner for client_id = 4 -->
+<div class="text-center">
+    <% var ad = ads[Math.floor(Math.random() * ads.length)]; %>
+    <a href="<%= ad.link %>">
+        <img class="img-fluid mb-2" src="<%= 'http://www.canadiancyclist.com' + ad.banner_content %>"
+               alt="<%= ad.campaign_title %>" />
+   </a>
+</div>
+
 <!--Recent Articles-->
+
 <section id="main" class=" p-0 mb-3">
     <div class="container">
         <div id="list p-0 m-0">
@@ -8,9 +19,9 @@
             <h3 class="text-center list-group-item list-group-item-action flex-column align-items-start post" style="background: #8054B4; color: white;">
                 Latest Women's Reviews</h3>
             <div class="list-group m-0 pt-0 article">
-                <% posts.forEach((post, index) => { %>
-                <a href="../dailynews/<%= post.id %>"
-                    class="list-group-item list-group-item-action flex-column align-items-start post <% if (index % 2 == 0) { %>  bg-light <% } %>">
+                <% posts.forEach((post, womenscycling) => { %>
+                <a href="../womenscycling/<%= post.id %>"
+                        class="list-group-item list-group-item-action flex-column align-items-start post <% if (womenscycling % 2 == 0) { %>  bg-light <% } %>">
                     <div class="d-flex w-100 justify-content-between">
                         <h6 class="article-title mb-1"><%= post.news_title %> </h6>
                         <small
