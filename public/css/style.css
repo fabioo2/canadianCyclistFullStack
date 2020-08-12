@@ -51,9 +51,13 @@
 
 /* full article */
 
-#full-article img {
+#full-article img, #full-article .html5-video-container{
     max-width: 100%;
     height: auto;
+}
+
+#full-article object {
+    max-width: 100% !important;
 }
 
 /* footer */
@@ -72,7 +76,7 @@
     height: 100vh;
 }
 
-#search-box, #article-box, #featured-box {
+#search-box, #article-box, #featured-box, #classified-box {
     box-shadow:
     0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048),
@@ -85,3 +89,5 @@
 .radio {
     margin: 1em;
 }
+
+/* Classifieds */

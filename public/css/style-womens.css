@@ -7,13 +7,6 @@
     .last-link {
         margin-bottom: 8px;   
     }
-    #navbarNav {
-        background-color: #8054B4;
-        padding: 10px;
-    }
-    .nav-link {
-        color: white;
-    }
 }
 /* featured articles */
 
@@ -61,6 +54,17 @@
 
 .logo-cc {
     margin-top: -0.5em;
+}
+
+/* full article */
+
+#full-article img{
+    max-width: 100% !important; 
+    height: auto !important;
+}
+
+#full-article object {
+    max-width: 100% !important;
 }
 
 /* footer */

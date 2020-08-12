@@ -1,43 +1,45 @@
 <%- include('../partials/headerWomens') %>
-
-<div class="container">
-    <div class="row">
-        <!-- Post Content Column -->
-        <div class="col-lg-8">
-            <!-- Title -->
-            <h1 class="mt-4"><%- posts[0].news_title %></h1>
-
-            <!-- Author -->
-            <p class="lead">
-                by
-                <a href="#"><%- posts[0].username %></a>
-            </p>
-
-            <hr />
-
-            <!-- Date/Time -->
-            <p>Posted on <%- posts[0].creation_date.toLocaleString() %></p>
-
-            <hr />
-
-            <!-- Ad Banner -->
-            <!-- Currently it only shows cc banner for client_id = 4 -->
-            <% var ad = ads[Math.floor(Math.random() * ads.length)]; %>
-            <a href="<%= ad.link %>">
-                <img class="img-fluid" src="<%= 'http://www.canadiancyclist.com' + ad.banner_content %>"
-                    alt="<%= ad.campaign_title %>" />
-            </a>
-
-            <hr />
-
-            <!-- Post Content -->
-            <div id="full-article">
-                <%- posts[0].news_content.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/') %>
+<div>
+    <div class="container">
+        <div class="row">
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+                <!-- Title -->
+                <h1 class="mt-4"><%- posts[0].news_title %></h1>
+    
+                <!-- Author -->
+                <p class="lead">
+                    by
+                    <a href="#"><%- posts[0].username %></a>
+                </p>
+    
+                <hr />
+    
+                <!-- Date/Time -->
+                <p>Posted on <%- posts[0].creation_date.toLocaleString() %></p>
+    
+                <hr />
+    
+                <!-- Ad Banner -->
+                <!-- Currently it only shows cc banner for client_id = 4 -->
+                <% var ad = ads[Math.floor(Math.random() * ads.length)]; %>
+                <a href="<%= ad.link %>">
+                    <img class="img-fluid" src="<%= 'http://www.canadiancyclist.com' + ad.banner_content %>"
+                        alt="<%= ad.campaign_title %>" />
+                </a>
+    
+                <hr />
+    
+                <!-- Post Content -->
+                <div id="full-article">
+                    <%- posts[0].news_content.replace(/(\.\.\/)/g , 'http://www.canadiancyclist.com/') %>
+                </div>
+    
+                <hr />
             </div>
-
-            <hr />
-        </div>
-<!-- /.row -->
+    <!-- /.row -->
+    </div> 
 </div>
+
 
 <%- include('../partials/footerWomens') %>
