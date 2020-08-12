@@ -187,7 +187,7 @@ exports.renderWomensReviewsArticle = (req, res) => {
 
 //Women's Resources page GET ALL
 exports.renderWomensResourcesPage = (req, res) => {
-    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 16 AND c.id >= 16918 order by creation_date desc limit 30';
+    let sql = 'select c.id, c.news_title, c.news_content, c.creation_date, u.username from cc_dailynews c join users u ON c.author_id = u.uid join cc_dailynews_category dc ON c.id = dc.cc_dailynews_id where category_id = 16 order by creation_date desc limit 30';
     pool.query(sql, (err, result) => {
         if (err) {
             res.redirect('/');
@@ -279,26 +279,26 @@ exports.renderGalleryPage = (req, res) => {
     let id = req.params.id;
     let getSelectedEvent = `select * from cc_event e join cc_event_subcategory s where e.id = s.cc_event_id and year(e.date_from) = ${pool.escape(year_num)} and e.id = ${pool.escape(event_id)} and s.id = ${pool.escape(id)}`;
     let getPhotos = `select * from cc_photo p join cc_event e where p.cc_event_id = e.id and year(e.date_from) = ${pool.escape(year_num)} and e.id = ${pool.escape(event_id)} and p.cc_event_subcategory_id = ${pool.escape(id)}`;
-    let getRelatedEvent = `select s.id, s.cc_event_id, s.event_sub_category, e.event_title, year(e.date_from) as year_num from cc_event_subcategory s join cc_event e where s.cc_event_id = e.id and year(e.date_from) = ${pool.escape(year_num)} and e.id = ${pool.escape(event_id)}`;
+    let sql2 = `select s.id, s.cc_event_id, s.event_sub_category, e.event_title, year(e.date_from) as year_num from cc_event_subcategory s join cc_event e where s.cc_event_id = e.id and year(e.date_from) = ${pool.escape(year_num)} and e.id = ${pool.escape(event_id)}`;
 
     //execute query
     pool.query(getSelectedEvent, (err, result) => {
         if (err) {
             res.redirect('/');
         }
-        pool.query(getPhotos, (err2, result2) => {
-            if (err2) {
+        pool.query(getPhotos, (err, result2) => {
+            if (err) {
                 res.redirect('/');
             }
-            pool.query(getRelatedEvent, (err3, result3) => {
-                if (err3) {
+            pool.query(sql2, (err2, result3) => {
+                if (err2) {
                     res.redirect('/');
                 }
                 res.render('photos/gallery.ejs', {
                     title: 'Canadian Cyclist',
                     posts: result,
                     photos: result2,
-                    events: result3,
+                    types: result3,
                 });
             });
         });
@@ -420,7 +420,7 @@ exports.postClassified = (req, res) => {
         }
         res.render('classifieds/createClassifieds.ejs', {
             title: `Canadian Cyclist | Classifieds`,
-            message: 'Classified Ad has been submitted for admin approval',
+            message: 'Classified Ad has been submitted for adminnn approval',
         });
     });
 };
