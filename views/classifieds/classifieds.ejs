@@ -22,7 +22,7 @@
         <form action="/classifieds/results" method="post">
             <div class="form-group">
                 <label for="category">Category</label>
-                <select class="form-control" name="category" id="category">
+                <select class="form-control" name="category" id="category" required>
                     <option value="">Please Select</option>
                     <option value="1">Complete Bikes - Road</option>
                     <option value="2">Complete Bikes - Mountain</option>
@@ -41,12 +41,12 @@
             <div class="form-group mb-5">
                 <label for="searchInput">Keyword(s)</label>
                 <input type="text" class="form-control" name="searchInput" id="searchInput"
-                    aria-describedby="searchInput">
+                    aria-describedby="searchInput" required>
                 <small id="emailHelp" class="form-text text-muted">Enter a keyword here</small>
             </div>
             <!-- Radio Buttons -->
             <div class="form-group mb-5">
-                <input type="radio" class="radio" name="status" id="status" value="1" />For Sale
+                <input type="radio" class="radio" name="status" id="status" value="1" checked />For Sale
                 <input type="radio" class="radio" name="status" id="status" value="2" />Wanted
             </div>
 
