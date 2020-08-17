@@ -41,8 +41,8 @@
   <% } %>
     <!-- display each of subcategory of the event -->
     <!-- redirect to the link -->
-  <% events.forEach((event) => { %>
-  <a href="/photos/<%= events[0].year_num %>/<%= events[0].cc_event_id %>/<%= event.id %>">
+  <% relatedEvents.forEach((event) => { %>
+  <a href="/photos/<%= relatedEvents[0].year_num %>/<%= relatedEvents[0].cc_event_id %>/<%= event.id %>">
     <p><%= event.event_sub_category %></p>
   </a>
   <% }) %>
