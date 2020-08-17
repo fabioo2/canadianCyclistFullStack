@@ -9,14 +9,14 @@
     
                 <!-- Author -->
                 <p class="lead">
-                    by
-                    <a href="#"><%- posts[0].username %></a>
+                    by 
+                    <%- posts[0].username %></a>
                 </p>
     
                 <hr />
     
                 <!-- Date/Time -->
-                <p>Posted on <%- posts[0].creation_date.toLocaleString() %></p>
+                <p>Posted on <%- posts[0].creation_date.toLocaleString('en-US', {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'}) %></p>
     
                 <hr />
     
@@ -36,6 +36,12 @@
                 </div>
     
                 <hr />
+
+                <p>
+                    <a href="/womenscycling">Return to Cycling for Women Homepage</a>
+                    &nbsp;|&nbsp;
+                    <a href="#top">Back to Top</a>
+                </p>
             </div>
     <!-- /.row -->
     </div> 

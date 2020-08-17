@@ -24,7 +24,7 @@
                      <p><span class="font-weight-bold">Contact: </span><%- post.class_name %></p>
                      <p><span class="font-weight-bold">Phone: </span><%- post.class_phone %></p>
                      <p><span class="font-weight-bold">Email: </span><%- post.class_email %></p>
-                     <p><span class="font-weight-bold">Posted: </span><%- post.class_date %></p>
+                     <p><span class="font-weight-bold">Posted: </span><%- post.class_date.toLocaleDateString('en-US') %></p>
         
                     <% }) %>
                     <hr />
