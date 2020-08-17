@@ -8,7 +8,7 @@
         <form action="/classifieds/create" method="post">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" name="name" id="name" aria-describedby="name">
+                <input type="text" class="form-control" name="name" id="name" aria-describedby="name" required>
             </div>
             <div class="form-group">
                 <label for="phone">Phone</label>
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="type">Type of Ad</label>
-                <select class="form-control" name="type" id="type">
+                <select class="form-control" name="type" id="type" required>
                     <option value="">Please Select</option>
                     <option value="1">For Sale</option>  
                     <option value="2">Wanted</option>    
@@ -56,11 +56,11 @@
             </div>
             <div class="form-group">
                 <label for="title">Title of your ad</label>
-                <input type="text" class="form-control" name="title" id="title" aria-describedby="title">
+                <input type="text" class="form-control" name="title" id="title" aria-describedby="title" required>
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <input type="price" class="form-control" name="price" id="price" aria-describedby="price">
+                <input type="price" class="form-control" name="price" id="price" aria-describedby="price" required>
             </div>
             <div class="form-group">
                 <label for="content">Copy</label>

@@ -401,7 +401,6 @@ exports.postClassified = (req, res) => {
     let date = new Date();
     date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
-    console.log(req.body);
     if (req.body.hideEmail == 'true') {
         hideEmail = 1;
     }
